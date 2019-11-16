@@ -1973,6 +1973,8 @@ namespace OpenGL.CoreUI
 					return KeyCode.CapsLock;
 				case VirtualKeys.Escape:
 					return KeyCode.Escape;
+                case VirtualKeys.Back:
+                    return KeyCode.Back;
 
 				case VirtualKeys.Space:
 					return KeyCode.Space;

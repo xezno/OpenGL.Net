@@ -45,6 +45,8 @@ namespace OpenGL.CoreUI
 		CapsLock,
 		/// <summary></summary>
 		Escape,
+        /// <summary></summary>
+        Back,
 		/// <summary></summary>
 		Space,
 		/// <summary></summary>
@@ -229,6 +231,6 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Internal use: maximum number of keys recognized.
 		/// </summary>
-		MaxKeycode,
-	}
+		MaxKeycode
+    }
 }
