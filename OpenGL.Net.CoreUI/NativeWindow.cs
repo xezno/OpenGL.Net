@@ -895,16 +895,16 @@ namespace OpenGL.CoreUI
 		/// </summary>
 		public abstract bool CursorVisible { get; set; }
 
-		/// <summary>
-		/// Emulates the mouse move event.
-		/// </summary>
-		/// <param name="location">
-		/// The <see cref="Point"/> indicating the location of the mouse at the event.
-		/// </param>
-		/// <remarks>
-		/// This method is mainly used for testing, but it may be useful for some application.
-		/// </remarks>
-		public abstract void EmulatesMouseMove(Point location);
+        /// <summary>
+        /// Emulates the mouse move event.
+        /// </summary>
+        /// <param name="location">
+        /// The <see cref="Point"/> indicating the location of the mouse at the event.
+        /// </param>
+        /// <remarks>
+        /// This method is mainly used for testing, but it may be useful for some application.
+        /// </remarks>
+        public abstract void EmulatesMouseMove(Point location);
 
 		/// <summary>
 		/// Emulates the mouse buttons pressed event.
@@ -1088,11 +1088,17 @@ namespace OpenGL.CoreUI
 		/// Raise the event <see cref="MouseEnter"/>.
 		/// </summary>
 		protected virtual void OnMouseEnter(Point location, MouseButton buttons)
-		{
-			MouseEnter?.Invoke(this, new NativeWindowMouseEventArgs(DeviceContext, GLContext, location, buttons));
+        {
+            UpdateCursorVisibility(); // Update the mouse cursor's visibility in case it has changed between mouse enter -> mouse leave
+            MouseEnter?.Invoke(this, new NativeWindowMouseEventArgs(DeviceContext, GLContext, location, buttons));
 		}
 
-		/// <summary>
+        protected virtual void UpdateCursorVisibility()
+        {
+
+        }
+
+        /// <summary>
 		/// Mouse has been moved outside the window.
 		/// </summary>
 		public event EventHandler<NativeWindowEventArgs> MouseLeave;
@@ -1189,7 +1195,12 @@ namespace OpenGL.CoreUI
 		/// </summary>
 		public bool IsDisposed { get { return _Disposed; } }
 
-		/// <summary>
+        /// <summary>
+        /// Set the window title.
+        /// </summary>
+        public abstract string Caption { set; }
+
+        /// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting managed/unmanaged resources.
 		/// </summary>
 		/// <param name="disposing">

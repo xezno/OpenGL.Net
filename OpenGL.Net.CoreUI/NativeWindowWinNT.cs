@@ -35,7 +35,7 @@ namespace OpenGL.CoreUI
 	/// <summary>
 	/// NativeWindow implementation for WindowsNT platform.
 	/// </summary>
-	class NativeWindowWinNT : NativeWindow
+	public class NativeWindowWinNT : NativeWindow
 	{
 		#region Constructors
 
@@ -208,8 +208,8 @@ namespace OpenGL.CoreUI
 			if (_TrackingMouseLeave == false) {
 				// Emulates 'WM_MOUSEENTER'
 				OnMouseEnter(mouseLocation, mouseButton);
-				// Keep tracking WM_MOUSELEAVE
-				TRACKMOUSEEVENT tme = new TRACKMOUSEEVENT(TME.LEAVE, hWnd);
+                // Keep tracking WM_MOUSELEAVE
+                TRACKMOUSEEVENT tme = new TRACKMOUSEEVENT(TME.LEAVE, hWnd);
 				_TrackingMouseLeave = UnsafeNativeMethods.TrackMouseEvent(ref tme);
 				Debug.Assert(_TrackingMouseLeave, new Win32Exception(Marshal.GetLastWin32Error()).Message);
 			}
@@ -243,9 +243,9 @@ namespace OpenGL.CoreUI
 		
 		private IntPtr WindowsWndProc_MOUSEWHEEL(IntPtr hWnd, IntPtr wParam, IntPtr lParam)
 		{
-			short wheelTicks = (short)(((wParam.ToInt32() >> 16) & 0xFFFF) / /* WHEEL_DELTA */ 120);
+            short wheelTicks = (short)(((wParam.ToInt32() >> 16) & 0xFFFF) / /* WHEEL_DELTA */ 120);
 
-			OnMouseWheel(WindowsWndProc_GetMouseLocation(lParam), WindowsWndProc_GetMouseButtons(wParam), wheelTicks);
+            OnMouseWheel(WindowsWndProc_GetMouseLocation(lParam), WindowsWndProc_GetMouseButtons(wParam), wheelTicks);
 
 			return IntPtr.Zero;
 		}
@@ -1549,7 +1549,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Enumeration for virtual keys.
 		/// </summary>
-		private enum VirtualKeys : ushort
+		public enum VirtualKeys : ushort
 		{
 			/// <summary></summary>
 			LeftButton = 0x01,
@@ -1957,8 +1957,11 @@ namespace OpenGL.CoreUI
 		/// </returns>
 		private static KeyCode ToKeyCode(VirtualKeys key)
 		{
-			switch (key) {
-				case VirtualKeys.Tab:
+			switch (key)
+            {
+                case VirtualKeys.Back:
+                    return KeyCode.Back;
+                case VirtualKeys.Tab:
 					return KeyCode.Tab;
 
 				case VirtualKeys.Return:
@@ -1973,8 +1976,6 @@ namespace OpenGL.CoreUI
 					return KeyCode.CapsLock;
 				case VirtualKeys.Escape:
 					return KeyCode.Escape;
-                case VirtualKeys.Back:
-                    return KeyCode.Back;
 
 				case VirtualKeys.Space:
 					return KeyCode.Space;
@@ -1993,7 +1994,7 @@ namespace OpenGL.CoreUI
 				case VirtualKeys.Down:
 					return KeyCode.Down;
 
-				case VirtualKeys.Insert:
+                case VirtualKeys.Insert:
 					return KeyCode.Insert;
 				case VirtualKeys.Delete:
 					return KeyCode.Delete;
@@ -2163,7 +2164,15 @@ namespace OpenGL.CoreUI
 					return KeyCode.NumLock;
 				case VirtualKeys.ScrollLock:
 					return KeyCode.ScrollLock;
-				default:
+                case VirtualKeys.OEMPlus:
+                    return KeyCode.Plus;
+                case VirtualKeys.OEMComma:
+                    return KeyCode.Comma;
+                case VirtualKeys.OEMMinus:
+                    return KeyCode.Minus;
+                case VirtualKeys.OEMPeriod:
+                    return KeyCode.Period;
+                default:
 					return KeyCode.None;
 			}
 		}
@@ -2506,7 +2515,16 @@ namespace OpenGL.CoreUI
 
 			[DllImport("user32.dll", SetLastError = true)]
 			public static extern bool TrackMouseEvent(ref TRACKMOUSEEVENT lpEventTrack);
-		}
+
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern bool SetCursor(IntPtr cursor);
+
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern IntPtr LoadCursor(IntPtr instance, string cursorName);
+
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
+        }
 
 		#endregion
 
@@ -2553,24 +2571,14 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the display handle associated this instance.
 		/// </summary>
-		public override IntPtr Display
-		{
-			get {
-				return IntPtr.Zero;
-			}
-		}
+		public override IntPtr Display => IntPtr.Zero;
 
-		/// <summary>
+        /// <summary>
 		/// Get the native window handle.
 		/// </summary>
-		public override IntPtr Handle
-		{
-			get {
-				return _Handle;
-			}
-		}
+		public override IntPtr Handle => _Handle;
 
-		/// <summary>
+        /// <summary>
 		/// Create the NativeWindow.
 		/// </summary>
 		/// <param name="x">
@@ -2816,12 +2824,9 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the implemented window styles by the underlying implementation.
 		/// </summary>
-		public override NativeWindowStyle SupportedStyles
-		{
-			get { return NativeWindowStyle.Border | NativeWindowStyle.Caption | NativeWindowStyle.Resizeable; }
-		}
+		public override NativeWindowStyle SupportedStyles => NativeWindowStyle.Border | NativeWindowStyle.Caption | NativeWindowStyle.Resizeable;
 
-		/// <summary>
+        /// <summary>
 		/// The styles of this NativeWindow.
 		/// </summary>
 		public override NativeWindowStyle Styles
@@ -2979,21 +2984,45 @@ namespace OpenGL.CoreUI
 			UnsafeNativeMethods.SendMessage(_Handle, WM.KEYUP,   new IntPtr((uint)virtualKey), IntPtr.Zero);
 		}
 
+        public bool _CursorVisible;
+
 		/// <summary>
 		/// Get or set the cursor visibility.
 		/// </summary>
-		public override bool CursorVisible { get; set; }
+		public override bool CursorVisible { get => _CursorVisible;
+            set
+            {
+                _CursorVisible = value;
+                UpdateCursorVisibility();
+            }
+        }
 
-		/// <summary>
-		/// Emulates the mouse move event.
-		/// </summary>
-		/// <param name="location">
-		/// The <see cref="Point"/> indicating the location of the mouse at the event.
-		/// </param>
-		/// <remarks>
-		/// This method is mainly used for testing, but it may be useful for some application.
-		/// </remarks>
-		public override void EmulatesMouseMove(Point location)
+        protected override void UpdateCursorVisibility()
+        {
+            // BUG: Setting cursor visibility to "true" after being "false" does not work.
+            UnsafeNativeMethods.SetCursor(_CursorVisible
+                ? UnsafeNativeMethods.LoadCursor(IntPtr.Zero, "IDC_ARROW")
+                : IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// Set the window caption.
+        /// </summary>
+        public override string Caption
+        {
+            set => UnsafeNativeMethods.SetWindowTextW(Handle, value);
+        }
+
+        /// <summary>
+        /// Emulates the mouse move event.
+        /// </summary>
+        /// <param name="location">
+        /// The <see cref="Point"/> indicating the location of the mouse at the event.
+        /// </param>
+        /// <remarks>
+        /// This method is mainly used for testing, but it may be useful for some application.
+        /// </remarks>
+        public override void EmulatesMouseMove(Point location)
 		{
 
 		}
