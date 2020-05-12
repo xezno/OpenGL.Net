@@ -235,6 +235,13 @@ namespace OpenGL.CoreUI
         Minus,
         /// <summary></summary>
         Period,
+		
+		/// <summary></summary>
+		OEM1,
+		/// <summary></summary>
+		OEM2,
+		/// <summary></summary>
+		OEM3,
 
         /// <summary>
         /// Internal use: maximum number of keys recognized.

@@ -316,7 +316,7 @@ namespace OpenGL.CoreUI
 			private int _WndExtra;
 			public IntPtr hInstance;
 			private IntPtr _Icon;
-			private IntPtr _Cursor;
+			public IntPtr cursor;
 			private IntPtr _Background;
 			[MarshalAs(UnmanagedType.LPTStr)]
 			private string _MenuName;
@@ -1327,6 +1327,29 @@ namespace OpenGL.CoreUI
 			YVirtualScreen = 77,
 		}
 
+
+		/// IDC constants
+		/// https://www.pinvoke.net/default.aspx/Constants/IDC_.html
+		enum IDC_STANDARD_CURSORS
+        {
+            IDC_ARROW = 32512,
+            IDC_IBEAM = 32513,
+            IDC_WAIT = 32514,
+            IDC_CROSS = 32515,
+            IDC_UPARROW = 32516,
+            IDC_SIZE = 32640,
+            IDC_ICON = 32641,
+            IDC_SIZENWSE = 32642,
+            IDC_SIZENESW = 32643,
+            IDC_SIZEWE = 32644,
+            IDC_SIZENS = 32645,
+            IDC_SIZEALL = 32646,
+            IDC_NO = 32648,
+            IDC_HAND = 32649,
+            IDC_APPSTARTING = 32650,
+            IDC_HELP = 32651
+        }
+
 		[Flags]
 		private enum SetWindowPosFlags : uint
 		{
@@ -2172,9 +2195,192 @@ namespace OpenGL.CoreUI
                     return KeyCode.Minus;
                 case VirtualKeys.OEMPeriod:
                     return KeyCode.Period;
+
+                case VirtualKeys.OEM1:
+                    return KeyCode.OEM1;
+                case VirtualKeys.OEM2:
+					return KeyCode.OEM2;
+				case VirtualKeys.OEM3:
+					return KeyCode.OEM3;
+
+                case VirtualKeys.LeftButton:
+                    break;
+                case VirtualKeys.RightButton:
+                    break;
+                case VirtualKeys.Cancel:
+                    break;
+                case VirtualKeys.MiddleButton:
+                    break;
+                case VirtualKeys.ExtraButton1:
+                    break;
+                case VirtualKeys.ExtraButton2:
+                    break;
+                case VirtualKeys.Clear:
+                    break;
+                case VirtualKeys.Pause:
+                    break;
+                case VirtualKeys.Kana:
+                    break;
+                case VirtualKeys.Junja:
+                    break;
+                case VirtualKeys.Final:
+                    break;
+                case VirtualKeys.Hanja:
+                    break;
+                case VirtualKeys.Convert:
+                    break;
+                case VirtualKeys.NonConvert:
+                    break;
+                case VirtualKeys.Accept:
+                    break;
+                case VirtualKeys.ModeChange:
+                    break;
+                case VirtualKeys.Prior:
+                    break;
+                case VirtualKeys.Next:
+                    break;
+                case VirtualKeys.Select:
+                    break;
+                case VirtualKeys.Print:
+                    break;
+                case VirtualKeys.Execute:
+                    break;
+                case VirtualKeys.Snapshot:
+                    break;
+                case VirtualKeys.Help:
+                    break;
+                case VirtualKeys.Sleep:
+                    break;
+                case VirtualKeys.NEC_Equal:
+                    break;
+                case VirtualKeys.Fujitsu_Masshou:
+                    break;
+                case VirtualKeys.Fujitsu_Touroku:
+                    break;
+                case VirtualKeys.Fujitsu_Loya:
+                    break;
+                case VirtualKeys.Fujitsu_Roya:
+                    break;
+                case VirtualKeys.LeftShift:
+                    break;
+                case VirtualKeys.RightShift:
+                    break;
+                case VirtualKeys.LeftControl:
+                    break;
+                case VirtualKeys.RightControl:
+                    break;
+                case VirtualKeys.LeftMenu:
+                    break;
+                case VirtualKeys.RightMenu:
+                    break;
+                case VirtualKeys.BrowserBack:
+                    break;
+                case VirtualKeys.BrowserForward:
+                    break;
+                case VirtualKeys.BrowserRefresh:
+                    break;
+                case VirtualKeys.BrowserStop:
+                    break;
+                case VirtualKeys.BrowserSearch:
+                    break;
+                case VirtualKeys.BrowserFavorites:
+                    break;
+                case VirtualKeys.BrowserHome:
+                    break;
+                case VirtualKeys.VolumeMute:
+                    break;
+                case VirtualKeys.VolumeDown:
+                    break;
+                case VirtualKeys.VolumeUp:
+                    break;
+                case VirtualKeys.MediaNextTrack:
+                    break;
+                case VirtualKeys.MediaPrevTrack:
+                    break;
+                case VirtualKeys.MediaStop:
+                    break;
+                case VirtualKeys.MediaPlayPause:
+                    break;
+                case VirtualKeys.LaunchMail:
+                    break;
+                case VirtualKeys.LaunchMediaSelect:
+                    break;
+                case VirtualKeys.LaunchApplication1:
+                    break;
+                case VirtualKeys.LaunchApplication2:
+                    break;
+                case VirtualKeys.OEM4:
+                    break;
+                case VirtualKeys.OEM5:
+                    break;
+                case VirtualKeys.OEM6:
+                    break;
+                case VirtualKeys.OEM7:
+                    break;
+                case VirtualKeys.OEM8:
+                    break;
+                case VirtualKeys.OEMAX:
+                    break;
+                case VirtualKeys.OEM102:
+                    break;
+                case VirtualKeys.ICOHelp:
+                    break;
+                case VirtualKeys.ICO00:
+                    break;
+                case VirtualKeys.ProcessKey:
+                    break;
+                case VirtualKeys.ICOClear:
+                    break;
+                case VirtualKeys.Packet:
+                    break;
+                case VirtualKeys.OEMReset:
+                    break;
+                case VirtualKeys.OEMJump:
+                    break;
+                case VirtualKeys.OEMPA1:
+                    break;
+                case VirtualKeys.OEMPA2:
+                    break;
+                case VirtualKeys.OEMPA3:
+                    break;
+                case VirtualKeys.OEMWSCtrl:
+                    break;
+                case VirtualKeys.OEMCUSel:
+                    break;
+                case VirtualKeys.OEMATTN:
+                    break;
+                case VirtualKeys.OEMFinish:
+                    break;
+                case VirtualKeys.OEMCopy:
+                    break;
+                case VirtualKeys.OEMAuto:
+                    break;
+                case VirtualKeys.OEMENLW:
+                    break;
+                case VirtualKeys.OEMBackTab:
+                    break;
+                case VirtualKeys.ATTN:
+                    break;
+                case VirtualKeys.CRSel:
+                    break;
+                case VirtualKeys.EXSel:
+                    break;
+                case VirtualKeys.EREOF:
+                    break;
+                case VirtualKeys.Play:
+                    break;
+                case VirtualKeys.Zoom:
+                    break;
+                case VirtualKeys.Noname:
+                    break;
+                case VirtualKeys.PA1:
+                    break;
+                case VirtualKeys.OEMClear:
+                    break;
                 default:
-					return KeyCode.None;
+					break;
 			}
+            return KeyCode.None;
 		}
 
 		private static VirtualKeys ToVirtualKeys(KeyCode key)
@@ -2520,10 +2726,16 @@ namespace OpenGL.CoreUI
             public static extern bool SetCursor(IntPtr cursor);
 
             [DllImport("user32.dll", SetLastError = true)]
-            public static extern IntPtr LoadCursor(IntPtr instance, string cursorName);
+            public static extern IntPtr LoadCursor(IntPtr instance, int lpCursorName);
+
+			[DllImport("user32.dll", SetLastError = true)]
+            public static extern IntPtr ShowCursor(bool bShow);
+
+			[DllImport("user32.dll", SetLastError = true)]
+            public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
 
             [DllImport("user32.dll", SetLastError = true)]
-            public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
+            public static extern bool SetCursorPos(int X, int Y);
         }
 
 		#endregion
@@ -2610,6 +2822,7 @@ namespace OpenGL.CoreUI
 			windowClass.lpfnWndProc = Marshal.GetFunctionPointerForDelegate(_WindowsWndProc);
 			windowClass.hInstance = _HInstance;
 			windowClass.lpszClassName = defaultWindowClass;
+            windowClass.cursor = UnsafeNativeMethods.LoadCursor(IntPtr.Zero, (int)IDC_STANDARD_CURSORS.IDC_ARROW);
 
 			if ((_ClassAtom = UnsafeNativeMethods.RegisterClassEx(ref windowClass)) == 0)
 				throw new Win32Exception(Marshal.GetLastWin32Error());
@@ -2984,7 +3197,7 @@ namespace OpenGL.CoreUI
 			UnsafeNativeMethods.SendMessage(_Handle, WM.KEYUP,   new IntPtr((uint)virtualKey), IntPtr.Zero);
 		}
 
-        public bool _CursorVisible;
+        private bool _CursorVisible;
 
 		/// <summary>
 		/// Get or set the cursor visibility.
@@ -2997,12 +3210,14 @@ namespace OpenGL.CoreUI
             }
         }
 
-        protected override void UpdateCursorVisibility()
+        public override void UpdateCursorVisibility()
         {
             // BUG: Setting cursor visibility to "true" after being "false" does not work.
             UnsafeNativeMethods.SetCursor(_CursorVisible
-                ? UnsafeNativeMethods.LoadCursor(IntPtr.Zero, "IDC_ARROW")
+                ? UnsafeNativeMethods.LoadCursor(_HInstance, (int)IDC_STANDARD_CURSORS.IDC_ARROW)
                 : IntPtr.Zero);
+
+            UnsafeNativeMethods.ShowCursor(_CursorVisible);
         }
 
         /// <summary>
@@ -3011,6 +3226,15 @@ namespace OpenGL.CoreUI
         public override string Caption
         {
             set => UnsafeNativeMethods.SetWindowTextW(Handle, value);
+        }
+
+		/// <summary>
+		/// Set the mouse cursor's position to a point on-screen.
+		/// </summary>
+		/// <param name="location">The point at which to put the cursor.</param>
+        public override void SetCursorPos(Point location)
+        {
+            UnsafeNativeMethods.SetCursorPos(location.X, location.Y);
         }
 
         /// <summary>

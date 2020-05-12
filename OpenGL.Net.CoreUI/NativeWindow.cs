@@ -1093,10 +1093,7 @@ namespace OpenGL.CoreUI
             MouseEnter?.Invoke(this, new NativeWindowMouseEventArgs(DeviceContext, GLContext, location, buttons));
 		}
 
-        protected virtual void UpdateCursorVisibility()
-        {
-
-        }
+        public virtual void UpdateCursorVisibility() { }
 
         /// <summary>
 		/// Mouse has been moved outside the window.
@@ -1175,6 +1172,8 @@ namespace OpenGL.CoreUI
 		{
 			MouseDoubleClick?.Invoke(this, new NativeWindowMouseEventArgs(DeviceContext, GLContext, location, buttons));
 		}
+
+		public virtual void SetCursorPos(Point location) { }
 
 		#endregion
 
