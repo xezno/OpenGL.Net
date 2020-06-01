@@ -1327,6 +1327,29 @@ namespace OpenGL.CoreUI
 			YVirtualScreen = 77,
 		}
 
+		
+		/// IDC constants
+		/// https://www.pinvoke.net/default.aspx/Constants/IDC_.html
+		enum IDC_STANDARD_CURSORS
+		{
+			IDC_ARROW = 32512,
+			IDC_IBEAM = 32513,
+			IDC_WAIT = 32514,
+			IDC_CROSS = 32515,
+			IDC_UPARROW = 32516,
+			IDC_SIZE = 32640,
+			IDC_ICON = 32641,
+			IDC_SIZENWSE = 32642,
+			IDC_SIZENESW = 32643,
+			IDC_SIZEWE = 32644,
+			IDC_SIZENS = 32645,
+			IDC_SIZEALL = 32646,
+			IDC_NO = 32648,
+			IDC_HAND = 32649,
+			IDC_APPSTARTING = 32650,
+			IDC_HELP = 32651
+		}
+
 		[Flags]
 		private enum SetWindowPosFlags : uint
 		{
@@ -2504,6 +2527,21 @@ namespace OpenGL.CoreUI
 
 			[DllImport("user32.dll", SetLastError = true)]
 			public static extern bool TrackMouseEvent(ref TRACKMOUSEEVENT lpEventTrack);
+
+			[DllImport("user32.dll", SetLastError = true)]
+			public static extern bool SetCursorPos(int X, int Y);
+
+			[DllImport("user32.dll", SetLastError = true)]
+			public static extern bool SetCursor(IntPtr cursor);
+
+			[DllImport("user32.dll", SetLastError = true)]
+			public static extern IntPtr LoadCursor(IntPtr instance, int lpCursorName);
+
+			[DllImport("user32.dll", SetLastError = true)]
+			public static extern IntPtr ShowCursor(bool bShow);
+
+			[DllImport("user32.dll", SetLastError = true)]
+			public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
 		}
 
 		#endregion
@@ -2977,10 +3015,46 @@ namespace OpenGL.CoreUI
 			UnsafeNativeMethods.SendMessage(_Handle, WM.KEYUP,   new IntPtr((uint)virtualKey), IntPtr.Zero);
 		}
 
+		private bool _CursorVisible;
+
 		/// <summary>
 		/// Get or set the cursor visibility.
 		/// </summary>
-		public override bool CursorVisible { get; set; }
+		public override bool CursorVisible { get => _CursorVisible;
+			set
+			{
+				_CursorVisible = value;
+				UpdateCursorVisibility();
+			}
+		}
+
+		public override void UpdateCursorVisibility()
+		{
+			// BUG: Setting cursor visibility to "true" after being "false" does not work.
+			UnsafeNativeMethods.SetCursor(_CursorVisible
+				? UnsafeNativeMethods.LoadCursor(_HInstance, (int)IDC_STANDARD_CURSORS.IDC_ARROW)
+				: IntPtr.Zero);
+
+			UnsafeNativeMethods.ShowCursor(_CursorVisible);
+		}
+
+		/// <summary>
+		/// Set the window caption.
+		/// </summary>
+		public override string Caption
+		{
+			set => UnsafeNativeMethods.SetWindowTextW(Handle, value);
+		}
+
+		/// <summary>
+		/// Set the mouse cursor's position to a point on-screen.
+		/// </summary>
+		/// <param name="location">The point at which to put the cursor.</param>
+		public override void SetCursorPos(Point location)
+		{
+			UnsafeNativeMethods.SetCursorPos(location.X, location.Y);
+		}
+
 
 		/// <summary>
 		/// Emulates the mouse move event.

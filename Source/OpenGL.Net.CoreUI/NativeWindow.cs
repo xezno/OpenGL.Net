@@ -759,6 +759,15 @@ namespace OpenGL.CoreUI
 
 		#endregion
 
+		#region Caption
+		
+		/// <summary>
+		/// Set the window title.
+		/// </summary>
+		public abstract string Caption { set; }
+
+		#endregion
+
 		#region Location
 
 		/// <summary>
@@ -941,6 +950,10 @@ namespace OpenGL.CoreUI
 		/// This method is mainly used for testing, but it may be useful for some application.
 		/// </remarks>
 		public abstract void EmulatesMouseWheel(Point location, int ticks);
+
+        public abstract void UpdateCursorVisibility();
+        public abstract void SetCursorPos(Point location);
+
 
 		#endregion
 

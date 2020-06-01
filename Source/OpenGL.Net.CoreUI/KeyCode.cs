@@ -46,6 +46,8 @@ namespace OpenGL.CoreUI
 		/// <summary></summary>
 		Escape,
 		/// <summary></summary>
+		Back,
+		/// <summary></summary>
 		Space,
 		/// <summary></summary>
 		End,
@@ -225,10 +227,25 @@ namespace OpenGL.CoreUI
 		NumLock,
 		/// <summary></summary>
 		ScrollLock,
+		/// <summary></summary>
+		Plus,
+		/// <summary></summary>
+		Comma,
+		/// <summary></summary>
+		Minus,
+		/// <summary></summary>
+		Period,
+		
+		/// <summary></summary>
+		OEM1,
+		/// <summary></summary>
+		OEM2,
+		/// <summary></summary>
+		OEM3,
 
 		/// <summary>
 		/// Internal use: maximum number of keys recognized.
 		/// </summary>
-		MaxKeycode,
+		MaxKeycode
 	}
 }
