@@ -49,17 +49,17 @@ namespace BindingsGen.GLSpecs
 
 		#region Utility
 
-		internal static bool IsCompatible(RegistryContext ctx, Command command)
+		internal static new bool IsCompatible(RegistryContext ctx, Command command)
 		{
 			return (IsCompatible(ctx, command, command.Parameters));
 		}
 
-		internal static bool IsCompatible(RegistryContext ctx, Command command, List<CommandParameter> parameters)
+		internal static new bool IsCompatible(RegistryContext ctx, Command command, List<CommandParameter> parameters)
 		{
 			return (parameters.FindIndex(delegate (CommandParameter item) { return (IsCompatible(ctx, command, item)); }) >= 0);
 		}
 
-		internal static bool IsCompatible(RegistryContext ctx, Command command, CommandParameter param)
+		internal static new bool IsCompatible(RegistryContext ctx, Command command, CommandParameter param)
 		{
 			// Pointer types ends with an '*'
 			return (param.GetImportType(command).EndsWith("*"));

@@ -714,12 +714,6 @@ namespace OpenGL.CoreUI
 		/// The OpenGL context created on this GlControl.
 		/// </summary>
 		protected IntPtr GLContext;
-
-		/// <summary>
-		/// The <see cref="NativeWindow"/> that owns <see cref="GLContext"/>.
-		/// </summary>
-		private NativeWindow _SharingWindow;
-
 		#endregion
 
 		#region Create & Destroy

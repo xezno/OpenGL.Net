@@ -474,7 +474,7 @@ namespace Khronos
 		/// <returns>
 		/// It returns the <see cref="KhronosVersion"/> corresponding to <paramref name="featureName"/>.
 		/// </returns>
-		internal static KhronosVersion ParseFeature(string featureName)
+		public static KhronosVersion ParseFeature(string featureName)
 		{
 			if (featureName == null)
 				throw new ArgumentNullException(nameof(featureName));

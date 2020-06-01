@@ -150,7 +150,7 @@ namespace Khronos
 		/// <param name="logMap">
 		/// The <see cref="KhronosLogMap"/> to be serialized into <paramref name="resourcePath"/>.
 		/// </param>
-		internal static void Save(string resourcePath, KhronosLogMap logMap)
+		public static void Save(string resourcePath, KhronosLogMap logMap)
 		{
 			if (resourcePath == null)
 				throw new ArgumentNullException(nameof(resourcePath));
