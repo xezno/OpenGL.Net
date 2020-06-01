@@ -56,6 +56,7 @@
     <Compile Remove="ARM\**" />
     <Compile Remove="ATI\**" />
     <Compile Remove="DMP\**" />
+    <Compile Remove="Extensions\**" />
     <Compile Remove="EXT\**" />
     <Compile Remove="FJ\**" />
     <Compile Remove="GREMEDY\**" />
@@ -98,6 +99,7 @@
     <EmbeddedResource Remove="ARM\**" />
     <EmbeddedResource Remove="ATI\**" />
     <EmbeddedResource Remove="DMP\**" />
+    <EmbeddedResource Remove="Extensions\**" />
     <EmbeddedResource Remove="EXT\**" />
     <EmbeddedResource Remove="FJ\**" />
     <EmbeddedResource Remove="GREMEDY\**" />
@@ -140,6 +142,7 @@
     <None Remove="ARM\**" />
     <None Remove="ATI\**" />
     <None Remove="DMP\**" />
+    <None Remove="Extensions\**" />
     <None Remove="EXT\**" />
     <None Remove="FJ\**" />
     <None Remove="GREMEDY\**" />

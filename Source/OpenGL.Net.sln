@@ -24,17 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{BAF8E731
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Toolkits", "Toolkits", "{81BBBDCD-40F4-43F2-BAA6-AE8280C19105}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{7F9EC9D0-456B-4452-8EFE-28ED3A16993C}"
-	ProjectSection(SolutionItems) = preProject
-		OpenGL.Net.CoreProfile.nuspec = OpenGL.Net.CoreProfile.nuspec
-		OpenGL.Net.CoreUI.nuspec = OpenGL.Net.CoreUI.nuspec
-		OpenGL.Net.Debug.nuspec = OpenGL.Net.Debug.nuspec
-		OpenGL.Net.ES2Profile.nuspec = OpenGL.Net.ES2Profile.nuspec
-		OpenGL.Net.Math.nuspec = OpenGL.Net.Math.nuspec
-		OpenGL.Net.nuspec = OpenGL.Net.nuspec
-		OpenGL.Net.SC2Profile.nuspec = OpenGL.Net.SC2Profile.nuspec
-	EndProjectSection
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Khronos.Net", "Khronos.Net\Khronos.Net.shproj", "{C403B635-6B87-4540-8679-7889ED5D3360}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Math", "Math", "{F042B79B-88F3-49AA-9A6C-69D3DAB3E172}"
