@@ -950,11 +950,6 @@ namespace OpenGL.CoreUI
 		/// This method is mainly used for testing, but it may be useful for some application.
 		/// </remarks>
 		public abstract void EmulatesMouseWheel(Point location, int ticks);
-
-        public abstract void UpdateCursorVisibility();
-        public abstract void SetCursorPos(Point location);
-
-
 		#endregion
 
 		#region Events
@@ -1200,11 +1195,6 @@ namespace OpenGL.CoreUI
 		/// Get whether this instance has been disposed.
 		/// </summary>
 		public bool IsDisposed { get { return _Disposed; } }
-
-        /// <summary>
-        /// Set the window title.
-        /// </summary>
-        public abstract string Caption { set; }
 
         /// <summary>
 		/// Performs application-defined tasks associated with freeing, releasing, or resetting managed/unmanaged resources.

@@ -45,17 +45,10 @@ namespace OpenGL.CoreUI
 		CapsLock,
 		/// <summary></summary>
 		Escape,
-<<<<<<< HEAD:OpenGL.Net.CoreUI/KeyCode.cs
-        /// <summary></summary>
-        Back,
-        /// <summary></summary>
-        Space,
-=======
 		/// <summary></summary>
 		Back,
 		/// <summary></summary>
 		Space,
->>>>>>> dev:Source/OpenGL.Net.CoreUI/KeyCode.cs
 		/// <summary></summary>
 		End,
 		/// <summary></summary>
@@ -234,16 +227,6 @@ namespace OpenGL.CoreUI
 		NumLock,
 		/// <summary></summary>
 		ScrollLock,
-<<<<<<< HEAD:OpenGL.Net.CoreUI/KeyCode.cs
-        /// <summary></summary>
-        Plus,
-        /// <summary></summary>
-        Comma,
-        /// <summary></summary>
-        Minus,
-        /// <summary></summary>
-        Period,
-=======
 		/// <summary></summary>
 		Plus,
 		/// <summary></summary>
@@ -251,28 +234,16 @@ namespace OpenGL.CoreUI
 		/// <summary></summary>
 		Minus,
 		/// <summary></summary>
-		Period,
->>>>>>> dev:Source/OpenGL.Net.CoreUI/KeyCode.cs
-		
+		Period,		
 		/// <summary></summary>
 		OEM1,
 		/// <summary></summary>
 		OEM2,
 		/// <summary></summary>
 		OEM3,
-
-<<<<<<< HEAD:OpenGL.Net.CoreUI/KeyCode.cs
-        /// <summary>
-        /// Internal use: maximum number of keys recognized.
-        /// </summary>
-        MaxKeycode
-    }
-}
-=======
 		/// <summary>
 		/// Internal use: maximum number of keys recognized.
 		/// </summary>
 		MaxKeycode
 	}
 }
->>>>>>> dev:Source/OpenGL.Net.CoreUI/KeyCode.cs
