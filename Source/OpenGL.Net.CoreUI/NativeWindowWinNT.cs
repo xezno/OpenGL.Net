@@ -2733,7 +2733,9 @@ namespace OpenGL.CoreUI
 			[DllImport("user32.dll", SetLastError = true)]
 			public static extern IntPtr ShowCursor(bool bShow);
 
-			[DllImport("user32.dll", SetLastError = true)]
+			#pragma warning disable CA2101
+			[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
+			#pragma warning restore CA2101
 			public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
 		}
 

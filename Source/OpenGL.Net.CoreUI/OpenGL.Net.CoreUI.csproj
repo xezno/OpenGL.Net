@@ -52,8 +52,8 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>bin\netcore\Debug\</OutputPath>
-    <DefineConstants>TRACE;NETCORE;NETCOREAPP2_2</DefineConstants>
+    <OutputPath>bin\netcore\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -64,7 +64,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OpenGL.Net\OpenGL.Net.csproj" />
-    <ProjectReference Include="..\OpenGL.Net\OpenGL.Net.Math.csproj" />
   </ItemGroup>
 
   <Import Project="Sdk.targets" Sdk="Microsoft.NET.Sdk" />
