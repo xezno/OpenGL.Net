@@ -257,7 +257,8 @@ namespace OpenGL.CoreUI
 			int x = lParam.ToInt32() & 0xFFFF;
 			int y = (lParam.ToInt32() >> 16) & 0xFFFF;
 
-			return new Point(x, (int)Height - y - 1);
+			// TODO: Flip Y here instead of within Game.cs
+			return new Point(x, y);
 		}
 
 		private static MouseButton WindowsWndProc_GetMouseButtons(IntPtr wParam)
@@ -2840,6 +2841,8 @@ namespace OpenGL.CoreUI
 					clientSize.left, clientSize.top, clientSize.right - clientSize.left, clientSize.bottom - clientSize.top,
 					IntPtr.Zero, IntPtr.Zero, windowClass.hInstance, IntPtr.Zero
 				);
+
+				ClientSize = new Size((int)width, (int)height);
 
 				if (_Handle == IntPtr.Zero)
 					throw new Win32Exception(Marshal.GetLastWin32Error());
