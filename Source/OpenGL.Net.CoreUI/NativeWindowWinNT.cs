@@ -98,6 +98,8 @@ namespace OpenGL.CoreUI
 					return WindowsWndProc_BUTTONDOUBLECLICK(hWnd, wParam, lParam);
 				case WM.MOUSEWHEEL:
 					return WindowsWndProc_MOUSEWHEEL(hWnd, wParam, lParam);
+				case WM.CLOSE:
+					return WindowsWndProc_CLOSE(hWnd, wParam, lParam);
 			}
 
 			// Callback default window procedure.
@@ -250,6 +252,14 @@ namespace OpenGL.CoreUI
 			return IntPtr.Zero;
 		}
 
+		private IntPtr WindowsWndProc_CLOSE(IntPtr hWnd, IntPtr wParam, IntPtr lParam)
+		{
+			// Notify about client closing
+			OnClose();
+
+			return IntPtr.Zero;
+		}
+
 		// ReSharper restore UnusedParameter.Local
 
 		private Point WindowsWndProc_GetMouseLocation(IntPtr lParam)
@@ -257,7 +267,6 @@ namespace OpenGL.CoreUI
 			int x = lParam.ToInt32() & 0xFFFF;
 			int y = (lParam.ToInt32() >> 16) & 0xFFFF;
 
-			// TODO: Flip Y here instead of within Game.cs
 			return new Point(x, y);
 		}
 
@@ -2738,6 +2747,12 @@ namespace OpenGL.CoreUI
 			[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Ansi)]
 			#pragma warning restore CA2101
 			public static extern bool SetWindowTextW(IntPtr windowHandle, string text);
+
+			[DllImport("user32.dll")]
+			public static extern bool EnableMenuItem(IntPtr hMenu, uint uIDEnableItem, uint uEnable);
+
+			[DllImport("user32.dll")]
+			public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 		}
 
 		#endregion
@@ -2842,8 +2857,6 @@ namespace OpenGL.CoreUI
 					IntPtr.Zero, IntPtr.Zero, windowClass.hInstance, IntPtr.Zero
 				);
 
-				ClientSize = new Size((int)width, (int)height);
-
 				if (_Handle == IntPtr.Zero)
 					throw new Win32Exception(Marshal.GetLastWin32Error());
 
@@ -2852,6 +2865,8 @@ namespace OpenGL.CoreUI
 				Dispose();
 				throw;
 			}
+
+			// UnsafeNativeMethods.EnableMenuItem(UnsafeNativeMethods.GetSystemMenu(_Handle, FALSE), SC_CLOSE, MF_BYCOMMAND | MF_ENABLED);
 			
 		}
 

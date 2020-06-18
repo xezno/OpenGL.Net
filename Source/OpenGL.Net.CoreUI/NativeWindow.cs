@@ -1045,6 +1045,16 @@ namespace OpenGL.CoreUI
 			Resize?.Invoke(this, EventArgs.Empty);
 		}
 
+		/// <summary>
+		/// Event raised whenever the window's close button is pressed.
+		/// </summary>
+		public event EventHandler<EventArgs> Close;
+
+		protected virtual void OnClose()
+        {
+			Close?.Invoke(this, EventArgs.Empty);
+        }
+
 		#endregion
 
 		#region Keyboard
