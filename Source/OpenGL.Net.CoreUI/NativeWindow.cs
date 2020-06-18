@@ -77,7 +77,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the native window handle.
 		/// </summary>
-		public abstract IntPtr Handle { get; }
+		public abstract IntPtr WindowHandle { get; }
 
 		#endregion
 
@@ -801,7 +801,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get or set the NativeWindow client area size.
 		/// </summary>
-		public abstract Size ClientSize
+		public abstract NetCoreEx.Geometry.Size ClientSize
 		{
 			get; set;
 		}
