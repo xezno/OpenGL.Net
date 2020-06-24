@@ -77,7 +77,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the native window handle.
 		/// </summary>
-		public abstract IntPtr Handle { get; }
+		public abstract IntPtr WindowHandle { get; }
 
 		#endregion
 
@@ -801,7 +801,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get or set the NativeWindow client area size.
 		/// </summary>
-		public abstract Size ClientSize
+		public abstract NetCoreEx.Geometry.Size ClientSize
 		{
 			get; set;
 		}
@@ -1044,6 +1044,16 @@ namespace OpenGL.CoreUI
 		{
 			Resize?.Invoke(this, EventArgs.Empty);
 		}
+
+		/// <summary>
+		/// Event raised whenever the window's close button is pressed.
+		/// </summary>
+		public event EventHandler<EventArgs> Close;
+
+		protected virtual void OnClose()
+        {
+			Close?.Invoke(this, EventArgs.Empty);
+        }
 
 		#endregion
 

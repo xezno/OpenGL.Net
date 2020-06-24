@@ -1,0 +1,63 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>OpenGL</RootNamespace>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Platforms>AnyCPU;x86</Platforms>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\netcore\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <OutputPath>bin\netcore\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\netcoreapp31\Release\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <DocumentationFile>bin\netcoreapp31\Release\OpenGL.Net.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutputPath>bin\netcoreapp31\Release\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <DocumentationFile>bin\netcoreapp31\Release\OpenGL.Net.WinForms.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\netcore\x86\Debug\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\netcoreapp31\x86\Release\</OutputPath>
+    <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\netcoreapp31\x86\Release\OpenGL.Net.WinForms.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>bin\netcoreapp31\Release\OpenGL.Net.WinForms.xml</DocumentationFile>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenGL.Net\OpenGL.Net.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="GlControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

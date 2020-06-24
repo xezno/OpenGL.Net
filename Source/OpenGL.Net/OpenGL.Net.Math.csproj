@@ -41,7 +41,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>bin\netcore\x86\Debug</OutputPath>
+    <OutputPath>bin\netcore\x86\Debug\</OutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
   </PropertyGroup>
 
