@@ -312,29 +312,29 @@ namespace OpenGL.CoreUI
 		// ReSharper disable FieldCanBeMadeReadOnly.Local
 		// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 
-		private static NativeWindowStyle ToNativeWindowStyle(WindowStyles styles)
+		private static NativeWindowStyles ToNativeWindowStyle(WindowStyles styles)
 		{
-			NativeWindowStyle windowStyles = NativeWindowStyle.None;
+			NativeWindowStyles windowStyleses = NativeWindowStyles.None;
 
 			if ((styles & WindowStyles.WS_BORDER) != 0)
-				windowStyles |= NativeWindowStyle.Border;
+				windowStyleses |= NativeWindowStyles.Border;
 			if ((styles & WindowStyles.WS_CAPTION) != 0)
-				windowStyles |= NativeWindowStyle.Caption;
+				windowStyleses |= NativeWindowStyles.Caption;
 			if ((styles & WindowStyles.WS_THICKFRAME) != 0)
-				windowStyles |= NativeWindowStyle.Resizeable;
+				windowStyleses |= NativeWindowStyles.Resizeable;
 
-			return windowStyles;
+			return windowStyleses;
 		}
 
-		private static WindowStyles FromNativeWindowStyle(NativeWindowStyle styles)
+		private static WindowStyles FromNativeWindowStyle(NativeWindowStyles styleses)
 		{
 			WindowStyles windowStyles = 0;
 
-			if ((styles & NativeWindowStyle.Border) != 0)
+			if ((styleses & NativeWindowStyles.Border) != 0)
 				windowStyles |= WindowStyles.WS_BORDER;
-			if ((styles & NativeWindowStyle.Caption) == NativeWindowStyle.Caption)
+			if ((styleses & NativeWindowStyles.Caption) == NativeWindowStyles.Caption)
 				windowStyles |= WindowStyles.WS_CAPTION | WindowStyles.WS_BORDER;
-			if ((styles & NativeWindowStyle.Resizeable) == NativeWindowStyle.Resizeable)
+			if ((styleses & NativeWindowStyles.Resizeable) == NativeWindowStyles.Resizeable)
 				windowStyles |= WindowStyles.WS_THICKFRAME;
 
 			return windowStyles;
@@ -860,10 +860,10 @@ namespace OpenGL.CoreUI
 		/// <param name="height">
 		/// A <see cref="UInt32"/> that specifies the window height, in pixels.
 		/// </param>
-		/// <param name="style">
-		/// The initial <see cref="NativeWindowStyle"/> of the window.
+		/// <param name="styles">
+		/// The initial <see cref="NativeWindowStyles"/> of the window.
 		/// </param>
-		public override void Create(int x, int y, uint width, uint height, NativeWindowStyle style)
+		public override void Create(int x, int y, uint width, uint height, NativeWindowStyles styles)
 		{
 			if (windowHandle != IntPtr.Zero)
 				throw new InvalidOperationException("already created");
@@ -885,7 +885,7 @@ namespace OpenGL.CoreUI
 			className = defaultWindowClass;
 
 			try {
-				WindowStyles windowStyle = FromNativeWindowStyle(style);
+				WindowStyles windowStyle = FromNativeWindowStyle(styles);
 
 				// Note: window size is meant as client area, but CreateWindowEx width/height specifies the external
 				// frame size: compute offset for frame borders
@@ -1098,12 +1098,12 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the implemented window styles by the underlying implementation.
 		/// </summary>
-		public override NativeWindowStyle SupportedStyles => NativeWindowStyle.Border | NativeWindowStyle.Caption | NativeWindowStyle.Resizeable;
+		public override NativeWindowStyles SupportedStyleses => NativeWindowStyles.Border | NativeWindowStyles.Caption | NativeWindowStyles.Resizeable;
 
         /// <summary>
 		/// The styles of this NativeWindow.
 		/// </summary>
-		public override NativeWindowStyle Styles
+		public override NativeWindowStyles Styleses
 		{
 			get
 			{
@@ -1120,15 +1120,15 @@ namespace OpenGL.CoreUI
 				CheckNotFullscreen();
 				CheckThread();
 
-				NativeWindowStyle styles = value;
+				NativeWindowStyles styleses = value;
 
 				// No border? No caption!
-				if ((styles & NativeWindowStyle.Border) == 0)
-					styles &= (NativeWindowStyle)~(0x0001 | 0x0004);
+				if ((styleses & NativeWindowStyles.Border) == 0)
+					styleses &= (NativeWindowStyles)~(0x0001 | 0x0004);
 
-				WindowStyles supportedStyles = FromNativeWindowStyle(SupportedStyles);
+				WindowStyles supportedStyles = FromNativeWindowStyle(SupportedStyleses);
 				WindowStyles win32Style = (WindowStyles)User32Methods.GetWindowLongPtr(windowHandle, (int)WindowLongFlags.GWL_STYLE) & ~supportedStyles;
-				WindowStyles win32StyleValue = FromNativeWindowStyle(styles);
+				WindowStyles win32StyleValue = FromNativeWindowStyle(styleses);
 
 				User32Methods.SetWindowLongPtr(windowHandle, (int)WindowLongFlags.GWL_STYLE, (IntPtr)(win32Style | win32StyleValue));
 				User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, 0, 0, 0, 0, WindowPositionFlags.SWP_FRAMECHANGED | WindowPositionFlags.SWP_NOACTIVATE | WindowPositionFlags.SWP_NOZORDER | WindowPositionFlags.SWP_NOMOVE | WindowPositionFlags.SWP_NOSIZE);

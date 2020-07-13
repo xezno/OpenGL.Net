@@ -733,10 +733,10 @@ namespace OpenGL.CoreUI
 		/// <param name="height">
 		/// A <see cref="UInt32"/> that specifies the window height, in pixels.
 		/// </param>
-		/// <param name="style">
-		/// The initial <see cref="NativeWindowStyle"/> of the window.
+		/// <param name="styles">
+		/// The initial <see cref="NativeWindowStyles"/> of the window.
 		/// </param>
-		public abstract void Create(int x, int y, uint width, uint height, NativeWindowStyle style);
+		public abstract void Create(int x, int y, uint width, uint height, NativeWindowStyles styles);
 
 		/// <summary>
 		/// Closes the NativeWindow.
@@ -827,12 +827,12 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Get the implemented window styles by the underlying implementation.
 		/// </summary>
-		public abstract NativeWindowStyle SupportedStyles { get; }
+		public abstract NativeWindowStyles SupportedStyleses { get; }
 
 		/// <summary>
 		/// The styles of this NativeWindow.
 		/// </summary>
-		public abstract NativeWindowStyle Styles { get; set; }
+		public abstract NativeWindowStyles Styleses { get; set; }
 
 		#endregion
 

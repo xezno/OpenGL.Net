@@ -57,12 +57,12 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// The <see cref="DeviceContext"/> used for the underlying <see cref="NativeWindow"/>.
 		/// </summary>
-		public readonly DeviceContext DeviceContext;
+		public DeviceContext DeviceContext { get; }
 
 		/// <summary>
 		/// The OpenGL context used for rendering.
 		/// </summary>
-		public readonly IntPtr RenderContext;
+		public IntPtr RenderContext { get; }
 
 		#endregion
 	}

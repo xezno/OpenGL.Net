@@ -27,7 +27,7 @@ namespace OpenGL.CoreUI
 	/// Styles associated to a <see cref="NativeWindow"/>.
 	/// </summary>
 	[Flags]
-	public enum NativeWindowStyle
+	public enum NativeWindowStyles
 	{
 		/// <summary>
 		/// No window style.

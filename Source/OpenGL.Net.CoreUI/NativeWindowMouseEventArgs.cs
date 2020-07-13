@@ -84,18 +84,18 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// Mouse location relative to the event. The position is relative to the lower-left corner of the client window area.
 		/// </summary>
-		public readonly Point Location;
+		public Point Location { get; }
 
 		/// <summary>
 		/// Mouse buttons pressed at the time of the event.
 		/// </summary>
-		public readonly MouseButton Buttons = MouseButton.None;
+		public MouseButton Buttons { get; } = MouseButton.None;
 
 		/// <summary>
 		/// The distance the wheel is rotated. A positive value indicates that the wheel was rotated forward, away from the
 		/// user; a negative value indicates that the wheel was rotated backward, toward the user.
 		/// </summary>
-		public readonly short WheelTicks;
+		public short WheelTicks { get; }
 
 		#endregion
 	}

@@ -55,7 +55,7 @@ namespace OpenGL.CoreUI
 		/// <summary>
 		/// The key relative to the event.
 		/// </summary>
-		public readonly KeyCode Key;
+		public KeyCode Key { get; }
 
 		#endregion
 	}
