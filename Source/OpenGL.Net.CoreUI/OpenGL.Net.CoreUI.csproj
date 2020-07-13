@@ -16,7 +16,7 @@
     <Version>0.5.2</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Platforms>AnyCPU;x86;x64</Platforms>
+    <Platforms>AnyCPU;x86</Platforms>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -24,12 +24,6 @@
     <OutputPath>bin\netcore\Release\</OutputPath>
     <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP2_2</DefineConstants>
     <DocumentationFile>bin\netcore\Release\netcoreapp2.2\OpenGL.Net.CoreUI.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>bin\netcore\Release\</OutputPath>
-    <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP2_2</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
@@ -42,12 +36,6 @@
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\Debug\</OutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
-    <OutputPath>bin\netcore\Debug\</OutputPath>
-    <DefineConstants>TRACE;NETCORE;NETCOREAPP2_2</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
