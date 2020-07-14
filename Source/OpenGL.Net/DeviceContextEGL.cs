@@ -51,7 +51,7 @@ namespace OpenGL
 			if (availApis.Length == 0)
 				throw new InvalidOperationException("no API available");
 
-			if (Array.Exists(availApis, api => api == DefaultAPI) == false)
+			if (!Array.Exists(availApis, api => api == DefaultAPI))
 				CurrentAPI = availApis[0];
 		}
 
@@ -205,7 +205,7 @@ namespace OpenGL
 
 				int[] major = new int[1], minor = new int[1];
 
-				if (Egl.Initialize(_Display, major, minor) == false)
+				if (!Egl.Initialize(_Display, major, minor))
 					throw new InvalidOperationException("unable to initialize the display");
 
 				_EglVersion = new KhronosVersion(major[0], minor[0], KhronosVersion.ApiEgl);
@@ -379,7 +379,7 @@ namespace OpenGL
 			{
 				if (_Handle != IntPtr.Zero)
 					throw new InvalidOperationException("handle already created");
-				if (_WindowHandle == IntPtr.Zero && Egl.CurrentExtensions.SurfacelessContext_KHR == false)
+				if (_WindowHandle == IntPtr.Zero && !Egl.CurrentExtensions.SurfacelessContext_KHR)
 					throw new InvalidOperationException("null window handle");
 
 				if (_WindowHandle != IntPtr.Zero) {
@@ -579,7 +579,7 @@ namespace OpenGL
 			int[] configCount = new int[1];
 			IntPtr[] configs = new IntPtr[8];
 
-			if (Egl.ChooseConfig(Display, configAttribs, configs, configs.Length, configCount) == false)
+			if (!Egl.ChooseConfig(Display, configAttribs, configs, configs.Length, configCount))
 				throw new InvalidOperationException("unable to choose configuration");
 			if (configCount[0] == 0)
 				throw new InvalidOperationException("no available configuration");
@@ -588,7 +588,7 @@ namespace OpenGL
 			int[] surfaceAttribs = { Egl.NONE };
 
 			if (Version >= Egl.Version_120) {
-				if (Egl.BindAPI(Egl.OPENGL_ES_API) == false)
+				if (!Egl.BindAPI(Egl.OPENGL_ES_API))
 					throw new InvalidOperationException("no ES API");
 			}
 
@@ -703,7 +703,7 @@ namespace OpenGL
 			if (_NativeSurface != null && _NativeSurface.Handle != IntPtr.Zero) {
 				int[] configId = new int[1];
 
-				if (Egl.QuerySurface(Display, EglSurface, Egl.CONFIG_ID, configId) == false)
+				if (!Egl.QuerySurface(Display, EglSurface, Egl.CONFIG_ID, configId))
 					throw new InvalidOperationException("unable to query EGL surface config ID");
 
 				_Config = ChoosePixelFormat(Display, configId[0]);
@@ -729,7 +729,7 @@ namespace OpenGL
 					default:
 						throw new InvalidOperationException($"'{api}' API not available");
 				}
-				if (Egl.BindAPI(apiEnum) == false)
+				if (!Egl.BindAPI(apiEnum))
 					throw new InvalidOperationException("no ES API");
 			} else if (api != null && api.Api != KhronosVersion.ApiGles2 && api.Api != KhronosVersion.ApiGles1)
 				throw new InvalidOperationException($"'{api}' API not available");
@@ -767,7 +767,7 @@ namespace OpenGL
 					int[] contextClientType = new int[1];
 
 					if (Egl.QueryContext(Display, ctx, Egl.CONTEXT_CLIENT_TYPE, contextClientType)) {
-						if (Egl.BindAPI((uint)contextClientType[0]) == false)
+						if (!Egl.BindAPI((uint)contextClientType[0]))
 							throw new InvalidOperationException("no ES API");
 					}
 				}
@@ -862,11 +862,11 @@ namespace OpenGL
 
 				// Get the number of pixel formats
 				int configCount;
-				if (Egl.GetConfigs(Display, null, 0, out configCount) == false)
+				if (!Egl.GetConfigs(Display, null, 0, out configCount))
 					throw new InvalidOperationException("unable to get configurations count");
 
 				IntPtr[] configs = new IntPtr[configCount];
-				if (Egl.GetConfigs(Display, configs, configs.Length, out configCount) == false)
+				if (!Egl.GetConfigs(Display, configs, configs.Length, out configCount))
 					throw new InvalidOperationException("unable to get configurations");
 				
 				foreach (IntPtr config in configs) {
@@ -876,7 +876,7 @@ namespace OpenGL
 					bool version13 = Version >= Egl.Version_130;
 					bool version14 = Version >= Egl.Version_140;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.CONFIG_ID, out pixelFormat.FormatIndex) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.CONFIG_ID, out pixelFormat.FormatIndex))
 						throw new InvalidOperationException("unable to get configuration parameter CONFIG_ID");
 
 					// Defaults to RGBA
@@ -884,34 +884,34 @@ namespace OpenGL
 					pixelFormat.RenderWindow = true;
 					pixelFormat.RenderBuffer = false;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.BUFFER_SIZE, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.BUFFER_SIZE, out param))
 						throw new InvalidOperationException("unable to get configuration parameter BUFFER_SIZE");
 					pixelFormat.ColorBits = param;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.RED_SIZE, out pixelFormat.RedBits) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.RED_SIZE, out pixelFormat.RedBits))
 						throw new InvalidOperationException("unable to get configuration parameter RED_SIZE");
-					if (Egl.GetConfigAttrib(Display, config, Egl.GREEN_SIZE, out pixelFormat.GreenBits) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.GREEN_SIZE, out pixelFormat.GreenBits))
 						throw new InvalidOperationException("unable to get configuration parameter GREEN_SIZE");
-					if (Egl.GetConfigAttrib(Display, config, Egl.BLUE_SIZE, out pixelFormat.BlueBits) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.BLUE_SIZE, out pixelFormat.BlueBits))
 						throw new InvalidOperationException("unable to get configuration parameter BLUE_SIZE");
-					if (Egl.GetConfigAttrib(Display, config, Egl.ALPHA_SIZE, out pixelFormat.AlphaBits) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.ALPHA_SIZE, out pixelFormat.AlphaBits))
 						throw new InvalidOperationException("unable to get configuration parameter ALPHA_SIZE");
-					if (Egl.GetConfigAttrib(Display, config, Egl.ALPHA_MASK_SIZE, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.ALPHA_MASK_SIZE, out param))
 						throw new InvalidOperationException("unable to get configuration parameter ALPHA_MASK_SIZE");
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.DEPTH_SIZE, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.DEPTH_SIZE, out param))
 						throw new InvalidOperationException("unable to get configuration parameter DEPTH_SIZE");
 					pixelFormat.DepthBits = param;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.STENCIL_SIZE, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.STENCIL_SIZE, out param))
 						throw new InvalidOperationException("unable to get configuration parameter STENCIL_SIZE");
 					pixelFormat.StencilBits = param;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.SAMPLES, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.SAMPLES, out param))
 						throw new InvalidOperationException("unable to get configuration parameter SAMPLES");
 					pixelFormat.MultisampleBits = param;
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.CONFIG_CAVEAT, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.CONFIG_CAVEAT, out param))
 						throw new InvalidOperationException("unable to get configuration parameter CONFIG_CAVEAT");
 					switch (param) {
 						case Egl.NONE:
@@ -923,13 +923,13 @@ namespace OpenGL
 					}
 
 					if (version12) {
-						if (Egl.GetConfigAttrib(Display, config, Egl.COLOR_BUFFER_TYPE, out param) == false)
+						if (!Egl.GetConfigAttrib(Display, config, Egl.COLOR_BUFFER_TYPE, out param))
 							throw new InvalidOperationException("unable to get configuration parameter COLOR_BUFFER_TYPE");
 						switch (param) {
 							case Egl.RGB_BUFFER:
 									break;
 							case Egl.LUMINANCE_BUFFER:
-								if (Egl.GetConfigAttrib(Display, config, Egl.LUMINANCE_SIZE, out param) == false)
+								if (!Egl.GetConfigAttrib(Display, config, Egl.LUMINANCE_SIZE, out param))
 									throw new InvalidOperationException("unable to get configuration parameter LUMINANCE_SIZE");
 								// Overrides color bits
 								pixelFormat.ColorBits = param;
@@ -939,14 +939,14 @@ namespace OpenGL
 						}
 					}
 
-					if (Egl.GetConfigAttrib(Display, config, Egl.MAX_SWAP_INTERVAL, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.MAX_SWAP_INTERVAL, out param))
 						throw new InvalidOperationException("unable to get configuration parameter MAX_SWAP_INTERVAL");
-					if (Egl.GetConfigAttrib(Display, config, Egl.MIN_SWAP_INTERVAL, out param) == false)
+					if (!Egl.GetConfigAttrib(Display, config, Egl.MIN_SWAP_INTERVAL, out param))
 						throw new InvalidOperationException("unable to get configuration parameter MIN_SWAP_INTERVAL");
 
 					// EGL 1.3 attributes
 					if (version13) {
-						if (Egl.GetConfigAttrib(Display, config, Egl.CONFORMANT, out param) == false)
+						if (!Egl.GetConfigAttrib(Display, config, Egl.CONFORMANT, out param))
 							throw new InvalidOperationException("unable to get configuration parameter CONFORMANT");
 
 						if ((param & Egl.OPENGL_ES2_BIT) != 0) {
@@ -967,12 +967,12 @@ namespace OpenGL
 						}
 
 						// Not implemented by ANGLE
-						//if (Egl.GetConfigAttrib(_Display, config, Egl.MATCH_NATIVE_PIXMAP, param) == false)
+						//if (!Egl.GetConfigAttrib(_Display, config, Egl.MATCH_NATIVE_PIXMAP, param))
 						//	throw new InvalidOperationException("unable to get configuration parameter MATCH_NATIVE_PIXMAP");
 					}
 
 					if (version14) {
-						if (Egl.GetConfigAttrib(Display, config, Egl.SURFACE_TYPE, out param) == false)
+						if (!Egl.GetConfigAttrib(Display, config, Egl.SURFACE_TYPE, out param))
 							throw new InvalidOperationException("unable to get configuration parameter SURFACE_TYPE");
 
 						if ((param & Egl.MULTISAMPLE_RESOLVE_BOX_BIT) != 0) { }
@@ -1062,7 +1062,7 @@ namespace OpenGL
 
 			configAttribs.Add(Egl.NONE);
 
-			if (Egl.ChooseConfig(display, configAttribs.ToArray(), configs, configs.Length, configCount) == false)
+			if (!Egl.ChooseConfig(display, configAttribs.ToArray(), configs, configs.Length, configCount))
 				throw new InvalidOperationException("unable to choose configuration");
 			if (configCount[0] == 0)
 				throw new InvalidOperationException("no available configuration");
@@ -1079,7 +1079,7 @@ namespace OpenGL
 			configAttribs.AddRange(new[] { Egl.CONFIG_ID, configId });
 			configAttribs.Add(Egl.NONE);
 
-			if (Egl.ChooseConfig(display, configAttribs.ToArray(), configs, configs.Length, configCount) == false)
+			if (!Egl.ChooseConfig(display, configAttribs.ToArray(), configs, configs.Length, configCount))
 				throw new InvalidOperationException("unable to choose configuration");
 			if (configCount[0] == 0)
 				throw new InvalidOperationException("no available configuration");
@@ -1117,7 +1117,7 @@ namespace OpenGL
 			int[] configCount = new int[1];
 			IntPtr[] configs = new IntPtr[1];
 
-			if (Egl.ChooseConfig(Display, configAttribs.ToArray(), configs, 1, configCount) == false)
+			if (!Egl.ChooseConfig(Display, configAttribs.ToArray(), configs, 1, configCount))
 				throw new InvalidOperationException("unable to choose configuration");
 			if (configCount[0] == 0)
 				throw new InvalidOperationException("no available configuration");

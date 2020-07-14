@@ -260,7 +260,7 @@ namespace Khronos
 		{
 			IntPtr libraryHandle;
 
-			if (_LibraryHandles.TryGetValue(libraryPath, out libraryHandle) == false) {
+			if (!_LibraryHandles.TryGetValue(libraryPath, out libraryHandle)) {
 				// Load library
 				libraryHandle = UnsafeNativeMethods.LoadLibrary(libraryPath);
 #if PLATFORM_LOG_ENABLED
@@ -389,7 +389,7 @@ namespace Khronos
 		{
 			IntPtr libraryHandle;
 
-			if (_LibraryHandles.TryGetValue(libraryPath, out libraryHandle) == false) {
+			if (!_LibraryHandles.TryGetValue(libraryPath, out libraryHandle)) {
 				if ((libraryHandle = UnsafeNativeMethods.dlopen(libraryPath, UnsafeNativeMethods.RTLD_LAZY)) == IntPtr.Zero) {
 					if (throws)
 						throw new InvalidOperationException($"unable to load library at {libraryPath}", new InvalidOperationException(UnsafeNativeMethods.dlerror()));

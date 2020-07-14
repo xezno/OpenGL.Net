@@ -706,7 +706,7 @@ namespace OpenGL.CoreUI
 		protected void MakeCurrentContext()
 		{
 			// Make context current
-			if (DeviceContext.MakeCurrent(GLContext) == false)
+			if (!DeviceContext.MakeCurrent(GLContext))
 				throw new InvalidOperationException("unable to make context current");
 		}
 

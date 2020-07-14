@@ -397,7 +397,7 @@ namespace OpenGL
 		/// </exception>
 		public override IntPtr CreateContext(IntPtr sharedContext)
 		{
-			if (Glx.CurrentExtensions == null || Glx.CurrentExtensions.CreateContext_ARB == false) {
+			if (Glx.CurrentExtensions == null || !Glx.CurrentExtensions.CreateContext_ARB) {
 				using (Glx.XLock displayLock = new Glx.XLock(Display)) {
 					// Get the corresponding X visual info
 					Glx.XVisualInfo xVisualInfo = _XVisualInfo != null ? _XVisualInfo : GetVisualInfoFromXWindow(_WindowHandle);
@@ -514,7 +514,7 @@ namespace OpenGL
 				switch (api.Api) {
 					case KhronosVersion.ApiGles1:
 					case KhronosVersion.ApiGles2:
-						if (Glx.CurrentExtensions.CreateContextEsProfile_EXT == false)
+						if (!Glx.CurrentExtensions.CreateContextEsProfile_EXT)
 							throw new NotSupportedException("OpenGL ES API not supported");
 						break;
 					default:

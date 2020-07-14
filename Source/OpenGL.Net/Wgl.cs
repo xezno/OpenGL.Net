@@ -163,7 +163,7 @@ namespace OpenGL
 				Type returnValueType = returnValue.GetType();
 
 				if        (returnValueType == typeof(Boolean)) {
-					if ((bool)returnValue == true)
+					if ((bool)returnValue)
 							methodErrorHandling = ErrorHandlingMode.LogOnly;
 				} else if (returnValueType == typeof(String)) {
 					if ((string)returnValue != null)

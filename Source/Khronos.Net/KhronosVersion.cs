@@ -485,7 +485,7 @@ namespace Khronos
 
 			// Match GL|GLES|GLSC|WGL|GLX|EGL versions
 			Match versionMatch = Regex.Match(featureName, @"(?<Api>GL(_(ES|SC|))?|WGL|GLX|EGL)_VERSION_(?<Major>\d+)_(?<Minor>\d+)");
-			if (versionMatch.Success == false)
+			if (!versionMatch.Success)
 				return null;
 			
 			string api = versionMatch.Groups["Api"].Value;
@@ -562,7 +562,7 @@ namespace Khronos
 
 			// Determine version value (support up to 3 version numbers)
 			Match versionMatch = Regex.Match(input, @"(?<Major>\d+)\.(?<Minor>\d+)(\.(?<Rev>\d+))?");
-			if (versionMatch.Success == false)
+			if (!versionMatch.Success)
 				throw new ArgumentException($"unrecognized pattern '{input}'", nameof(input));
 
 			int versionMajor = int.Parse(versionMatch.Groups["Major"].Value);
@@ -638,7 +638,7 @@ namespace Khronos
 			sb.AppendFormat("Version={0}.{1}", Major, Minor);
 			if (Revision != 0)
 				sb.AppendFormat(".{0}", Revision);
-			if (string.IsNullOrEmpty(Api) == false)
+			if (!string.IsNullOrEmpty(Api))
 				sb.AppendFormat(" API={0}", Api);
 			
 			if (Profile != null)
@@ -700,10 +700,10 @@ namespace Khronos
 				return true;
 
 #if NETSTANDARD1_1 || NETSTANDARD1_4 || NETCORE
-			if ((obj.GetType() != typeof(KhronosVersion)) && (obj.GetType().GetTypeInfo().IsSubclassOf(typeof(KhronosVersion)) == false))
+			if ((obj.GetType() != typeof(KhronosVersion)) && (!obj.GetType().GetTypeInfo().IsSubclassOf(typeof(KhronosVersion))))
 				return (false);
 #else
-			if (obj.GetType() != typeof(KhronosVersion) && obj.GetType().IsSubclassOf(typeof(KhronosVersion)) == false)
+			if (obj.GetType() != typeof(KhronosVersion) && !obj.GetType().IsSubclassOf(typeof(KhronosVersion)))
 				return false;
 #endif
 

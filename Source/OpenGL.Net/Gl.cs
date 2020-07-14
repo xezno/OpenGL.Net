@@ -101,7 +101,7 @@ namespace OpenGL
 				// Determine whether use EGL as device context backend
 				if (Egl.IsAvailable) {
 					// Note: on Linux without GLX
-					if (Platform.CurrentPlatformId == Platform.Id.Linux && Glx.IsAvailable == false)
+					if (Platform.CurrentPlatformId == Platform.Id.Linux && !Glx.IsAvailable)
 						Egl.IsRequired = true;
 #if !NETSTANDARD1_1
 					// Explict initialization
@@ -124,12 +124,12 @@ namespace OpenGL
 						throw new NotImplementedException("unable to create a simple context");
 
 					// Make contect current
-					if (windowDevice.MakeCurrent(renderContext) == false)
+					if (!windowDevice.MakeCurrent(renderContext))
 						throw new InvalidOperationException("unable to make current", windowDevice.GetPlatformException());
 
 #if !MONODROID
 					// Reload platform function pointers, if required
-					if (Egl.IsRequired == false && Platform.CurrentPlatformId == Platform.Id.WindowsNT)
+					if (!Egl.IsRequired && Platform.CurrentPlatformId == Platform.Id.WindowsNT)
 						Wgl.BindAPI();
 #endif
 
@@ -173,7 +173,7 @@ namespace OpenGL
 					// Before deletion, make uncurrent
 					windowDevice.MakeCurrent(IntPtr.Zero);
 					// Detroy context
-					if (windowDevice.DeleteContext(renderContext) == false)
+					if (!windowDevice.DeleteContext(renderContext))
 						throw new InvalidOperationException("unable to delete OpenGL context");
 				}
 
@@ -410,7 +410,7 @@ namespace OpenGL
 		private static KhronosVersion QueryContextVersionCore()
 		{
 			// Load minimal Gl functions for querying information
-			if (Egl.IsRequired == false) {
+			if (!Egl.IsRequired) {
 				BindAPIFunction(Version_100, null, "glGetError");
 				BindAPIFunction(Version_100, null, "glGetString");
 				BindAPIFunction(Version_100, null, "glGetIntegerv");

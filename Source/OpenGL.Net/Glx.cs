@@ -132,7 +132,7 @@ namespace OpenGL
 
 			lock (DeviceContextGLX._DisplayErrorsLock) {
 				Exception glxException;
-				if (DeviceContextGLX._DisplayErrors.TryGetValue(display, out glxException) == true)
+				if (DeviceContextGLX._DisplayErrors.TryGetValue(display, out glxException))
 					throw glxException;
 			}
 		}

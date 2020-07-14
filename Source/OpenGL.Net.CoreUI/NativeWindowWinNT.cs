@@ -202,7 +202,7 @@ namespace OpenGL.CoreUI
 			Point mouseLocation = WindowsWndProc_GetMouseLocation(lParam);
 			MouseButton mouseButton = WindowsWndProc_GetMouseButtons(wParam);
 
-			if (trackingMouseLeave == false) {
+			if (!trackingMouseLeave) {
 				// Emulates 'WM_MOUSEENTER'
 				OnMouseEnter(mouseLocation, mouseButton);
                 // Keep tracking WM_MOUSELEAVE
@@ -960,7 +960,7 @@ namespace OpenGL.CoreUI
 		/// </summary>
 		public override void Stop()
 		{
-			if (loopRunning == false)
+			if (!loopRunning)
 				throw new InvalidOperationException("loop not running");
 
 			User32Methods.PostMessage(windowHandle, (uint)WM.USER + 13, IntPtr.Zero, IntPtr.Zero);
@@ -981,7 +981,7 @@ namespace OpenGL.CoreUI
 
 				Rectangle windowRect;
 
-				if (User32Methods.GetWindowRect(windowHandle, out windowRect) == false)
+				if (!User32Methods.GetWindowRect(windowHandle, out windowRect))
 					throw new Win32Exception(Marshal.GetLastWin32Error());
 
 				return new Point(windowRect.Left, windowRect.Top);
@@ -996,7 +996,7 @@ namespace OpenGL.CoreUI
 					WindowPositionFlags.SWP_NOACTIVATE |
 					WindowPositionFlags.SWP_FRAMECHANGED;
 				
-				if (User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, value.X, value.Y, 0, 0, windowPosFlags) == false)
+				if (!User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, value.X, value.Y, 0, 0, windowPosFlags))
 					throw new Win32Exception(Marshal.GetLastWin32Error());
 			}
 		}
@@ -1013,7 +1013,7 @@ namespace OpenGL.CoreUI
 
 				Rectangle clientSize;
 
-				if (User32Methods.GetClientRect(windowHandle, out clientSize) == false)
+				if (!User32Methods.GetClientRect(windowHandle, out clientSize))
 					throw new Win32Exception(Marshal.GetLastWin32Error());
 
 				return clientSize.Size;
@@ -1031,7 +1031,7 @@ namespace OpenGL.CoreUI
 
 				NetCoreEx.Geometry.Size frameSize = GetClientToFrameRect(0, 0, (uint)value.Width, (uint)value.Height).Size;
 
-				if (User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, 0, 0, frameSize.Width, frameSize.Height, windowPosFlags) == false)
+				if (!User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, 0, 0, frameSize.Width, frameSize.Height, windowPosFlags))
 					throw new Win32Exception(Marshal.GetLastWin32Error());
 			}
 		}
@@ -1160,7 +1160,7 @@ namespace OpenGL.CoreUI
 					MonitorInfo monitorInfo = new MonitorInfo();
 					IntPtr monitor = User32Methods.MonitorFromWindow(windowHandle, MonitorFlag.MONITOR_DEFAULTTONEAREST);
 
-					if (User32Methods.GetMonitorInfo(monitor, ref monitorInfo) == false)
+					if (!User32Methods.GetMonitorInfo(monitor, ref monitorInfo))
 						throw new InvalidOperationException("unable to get monitor info");
 
 					// Store current location and size
@@ -1180,7 +1180,7 @@ namespace OpenGL.CoreUI
 					NetCoreEx.Geometry.Size size = monitorInfo.MonitorRect.Size;
 					const WindowPositionFlags windowPosFlags = WindowPositionFlags.SWP_NOZORDER | WindowPositionFlags.SWP_NOACTIVATE | WindowPositionFlags.SWP_FRAMECHANGED;
 
-					if (User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, location.X, location.Y, size.Width, size.Height, windowPosFlags) == false)
+					if (!User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, location.X, location.Y, size.Width, size.Height, windowPosFlags))
 						throw new InvalidOperationException("unable to set client size");
 				} else {
 					// Restore previous styles
@@ -1192,7 +1192,7 @@ namespace OpenGL.CoreUI
 					NetCoreEx.Geometry.Size size = fullscreenRestoreSize;
 					const WindowPositionFlags windowPosFlags = WindowPositionFlags.SWP_NOZORDER | WindowPositionFlags.SWP_NOACTIVATE | WindowPositionFlags.SWP_FRAMECHANGED;
 
-					if (User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, location.X, location.Y, size.Width, size.Height, windowPosFlags) == false)
+					if (!User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, location.X, location.Y, size.Width, size.Height, windowPosFlags))
 						throw new InvalidOperationException("unable to set client size");
 				}
 

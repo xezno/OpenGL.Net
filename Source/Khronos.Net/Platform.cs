@@ -153,7 +153,7 @@ namespace Khronos
 
 			foreach (string unameprog in new[] { "/usr/bin/uname", "/bin/uname", "uname" }) {
 				// Avoid exception handling
-				if (File.Exists(unameprog) == false)
+				if (!File.Exists(unameprog))
 					continue;
 
 				try {

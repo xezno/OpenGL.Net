@@ -68,7 +68,7 @@ namespace OpenGL
 		internal static INativeWindow CreateHiddenWindow()
 		{
 #if !MONODROID
-			if (Egl.IsRequired == false) {
+			if (!Egl.IsRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return new DeviceContextWGL.NativeWindow();
@@ -100,7 +100,7 @@ namespace OpenGL
 			get
 			{
 #if !MONODROID
-				if (Egl.IsRequired == false) {
+				if (!Egl.IsRequired) {
 					switch (Platform.CurrentPlatformId) {
 						case Platform.Id.WindowsNT:
 							return DeviceContextWGL.IsPBufferSupported;
@@ -125,7 +125,7 @@ namespace OpenGL
 		public static INativePBuffer CreatePBuffer(DevicePixelFormat pixelFormat, uint width, uint height)
 		{
 #if !MONODROID
-			if (Egl.IsRequired == false) {
+			if (!Egl.IsRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return new DeviceContextWGL.NativePBuffer(pixelFormat, width, height);
@@ -146,7 +146,7 @@ namespace OpenGL
 		public static DeviceContext Create()
 		{
 #if !MONODROID
-			if (IsEglRequired == false) {
+			if (!IsEglRequired) {
 				// OPENGL_NET_INIT environment set to NO?
 				if (Gl.NativeWindow == null)
 					throw new InvalidOperationException("OpenGL.Net not initialized", Gl.InitializationException);
@@ -167,7 +167,7 @@ namespace OpenGL
 			} else {
 #endif
 				// Create a surfaceless context
-				if (Egl.CurrentExtensions == null || Egl.CurrentExtensions.SurfacelessContext_KHR == false) {
+				if (Egl.CurrentExtensions == null || !Egl.CurrentExtensions.SurfacelessContext_KHR) {
 					// OPENGL_NET_INIT environment set to NO?
 					if (Gl.NativeWindow == null)
 						throw new InvalidOperationException("OpenGL.Net not initialized", Gl.InitializationException);
@@ -207,7 +207,7 @@ namespace OpenGL
 		public static DeviceContext Create(IntPtr display, IntPtr windowHandle)
 		{
 #if !MONODROID
-			if (IsEglRequired == false) {
+			if (!IsEglRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return new DeviceContextWGL(windowHandle);
@@ -239,7 +239,7 @@ namespace OpenGL
 		public static DeviceContext Create(INativePBuffer nativeBuffer)
 		{
 #if !MONODROID
-			if (IsEglRequired == false) {
+			if (!IsEglRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return new DeviceContextWGL(nativeBuffer);
@@ -442,7 +442,7 @@ namespace OpenGL
 
 				Egl.IsRequired = true;
 				try {
-					if (Egl.IsRequired == true) {
+					if (Egl.IsRequired) {
 						using (DeviceContext deviceContext = DeviceContext.Create()) {
 							foreach (string availableAPI in deviceContext.AvailableAPIs)
 								if (!availableAPIs.Contains(availableAPI))
@@ -682,7 +682,7 @@ namespace OpenGL
 		public static IntPtr GetCurrentContext()
 		{
 #if !MONODROID
-			if (Egl.IsRequired == false) {
+			if (!Egl.IsRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return Wgl.GetCurrentContext();

@@ -115,7 +115,7 @@ namespace Khronos
 #else
 			string assemblyPath = Assembly.GetAssembly(typeof(KhronosApi)).Location;
 
-			if (string.IsNullOrEmpty(assemblyPath) == false)
+			if (!string.IsNullOrEmpty(assemblyPath))
 				assemblyPath = Path.GetDirectoryName(assemblyPath);
 			else
 				assemblyPath = Directory.GetCurrentDirectory();
@@ -244,7 +244,7 @@ namespace Khronos
 				// ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
 				foreach (RequiredByFeatureAttribute attr in attrRequired) {
 					// Check for API support
-					if (attr.IsSupported(version, extensions) == false)
+					if (!attr.IsSupported(version, extensions))
 						continue;
 					// Keep track of the features requiring this command
 					if (attr.FeatureVersion != null) {
@@ -274,7 +274,7 @@ namespace Khronos
 					// ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
 					foreach (RemovedByFeatureAttribute attr in attrRemoved) {
 						// Check for API support
-						if (attr.IsRemoved(version, extensions) == false)
+						if (!attr.IsRemoved(version, extensions))
 							continue;
 						// Removed!
 						isRemoved = true;
@@ -384,7 +384,7 @@ namespace Khronos
 			// ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
 			foreach (RequiredByFeatureAttribute attr in attrRequired) {
 				// Check for API support
-				if (attr.IsSupported(version, extensions) == false)
+				if (!attr.IsSupported(version, extensions))
 					continue;
 				// Supported!
 				isRequired = true;
@@ -406,7 +406,7 @@ namespace Khronos
 
 				// ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
 				foreach (RemovedByFeatureAttribute attr in attrRemoved) {
-					if (attr.IsRemoved(version, extensions) == false)
+					if (!attr.IsRemoved(version, extensions))
 						continue;
 
 					// Removed!
@@ -425,7 +425,7 @@ namespace Khronos
 						isRemoved = false;
 				}
 
-				return isRemoved == false;
+				return !isRemoved;
 			}
 
 			return false;
@@ -767,7 +767,7 @@ namespace Khronos
 					}
 
 					// Support by version
-					if (version != null && support == false) {
+					if (version != null && !support) {
 #if NETSTANDARD1_1 || NETSTANDARD1_4 || NETCORE
 						IEnumerable<Attribute> coreAttributes = fieldInfo.GetCustomAttributes(typeof(CoreExtensionAttribute));
 #else
@@ -851,7 +851,7 @@ namespace Khronos
 				RequiredByFeatureAttribute hiddenExtensionAttrib = null;
 
 				foreach (RequiredByFeatureAttribute requiredByFeatureAttribute in requiredByFeatureAttributes) {
-					if (requiredByFeatureAttribute.IsSupportedApi(version.Api) == false) {
+					if (!requiredByFeatureAttribute.IsSupportedApi(version.Api)) {
 						// Version attribute
 						if (hiddenVersionAttrib == null)
 							hiddenVersionAttrib = requiredByFeatureAttribute;
@@ -886,14 +886,14 @@ namespace Khronos
 						if (hiddenVersionAttrib != null && hiddenExtensionAttrib == null) {
 							List<Type> versionDelegates;
 
-							if (hiddenVersions.TryGetValue(hiddenVersionAttrib.FeatureName, out versionDelegates) == false)
+							if (!hiddenVersions.TryGetValue(hiddenVersionAttrib.FeatureName, out versionDelegates))
 								hiddenVersions.Add(hiddenVersionAttrib.FeatureName, versionDelegates = new List<Type>());
 							versionDelegates.Add(delegateType);
 						}
 
 						if (hiddenExtensionAttrib != null) {
 							// Eventually leave to false for incomplete extensions
-							if (hiddenExtensions.ContainsKey(hiddenExtensionAttrib.FeatureName) == false)
+							if (!hiddenExtensions.ContainsKey(hiddenExtensionAttrib.FeatureName))
 								hiddenExtensions.Add(hiddenExtensionAttrib.FeatureName, true);
 						}
 					} else {
@@ -904,7 +904,7 @@ namespace Khronos
 				}
 
 				// Partial extensions are not supported
-				if (hiddenExtensionAttrib != null && commandDefined == false && hiddenExtensions.ContainsKey(hiddenExtensionAttrib.FeatureName))
+				if (hiddenExtensionAttrib != null && !commandDefined && hiddenExtensions.ContainsKey(hiddenExtensionAttrib.FeatureName))
 					hiddenExtensions[hiddenExtensionAttrib.FeatureName] = false;
 			}
 
@@ -927,7 +927,7 @@ namespace Khronos
 				bool sync = false;
 
 				foreach (KeyValuePair<string, bool> hiddenExtension in hiddenExtensions) {
-					if (hiddenExtension.Value == false)
+					if (!hiddenExtension.Value)
 						continue;       // Do not enable partial extension
 
 					extensions.EnableExtension(hiddenExtension.Key);

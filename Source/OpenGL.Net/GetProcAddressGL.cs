@@ -65,7 +65,7 @@ namespace OpenGL
 		public static IntPtr GetProcAddress(string function)
 		{
 #if !MONODROID
-			if (Egl.IsRequired == false) {
+			if (!Egl.IsRequired) {
 				switch (Platform.CurrentPlatformId) {
 					case Platform.Id.WindowsNT:
 						return GetGLProcAddressWGL.Instance.GetProcAddress(function);

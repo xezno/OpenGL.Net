@@ -105,7 +105,7 @@ namespace Khronos
 				if (version.Api != FeatureVersion.Api)
 					return (false);
 				// Profile must match, if defined
-				if (Profile != null && version.Profile != null && Regex.IsMatch(version.Profile, Profile) == false)
+				if (Profile != null && version.Profile != null && !Regex.IsMatch(version.Profile, Profile))
 					return (false);
 				// API version must be greater than or equal to the required version
 				return (version >= FeatureVersion);
@@ -113,7 +113,7 @@ namespace Khronos
 
 			if (extensions != null) {
 				// Check compatible API
-				if (Regex.IsMatch(version.Api, Api) == false)
+				if (!Regex.IsMatch(version.Api, Api))
 					return (false);
 
 				// Last chance: extension name

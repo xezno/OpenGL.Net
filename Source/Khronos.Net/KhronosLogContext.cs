@@ -115,7 +115,7 @@ namespace Khronos
 
 			foreach (FieldInfo fieldInfo in fieldInfos) {
 				// Enumeration values are defined as const fields
-				if (fieldInfo.IsLiteral == false)
+				if (!fieldInfo.IsLiteral)
 					continue;
 
 				// Enumeration values have at least one RequiredByFeatureAttribute
@@ -131,7 +131,7 @@ namespace Khronos
 					// Pure enum
 					if (logAttribute?.BitmaskName == null) {
 						// Collect enumeration
-						if (enumNames.ContainsKey(enumValueKey) == false)
+						if (!enumNames.ContainsKey(enumValueKey))
 							enumNames.Add(enumValueKey, fieldInfo.Name);
 					}
 
@@ -139,12 +139,12 @@ namespace Khronos
 					if (logAttribute?.BitmaskName != null) {
 						Dictionary<long, string> enumBitmaskNames;
 
-						if (enumBitmasks.TryGetValue(logAttribute.BitmaskName, out enumBitmaskNames) == false) {
+						if (!enumBitmasks.TryGetValue(logAttribute.BitmaskName, out enumBitmaskNames)) {
 							enumBitmaskNames = new Dictionary<long, string>();
 							enumBitmasks.Add(logAttribute.BitmaskName, enumBitmaskNames);
 						}
 
-						if (enumBitmaskNames.ContainsKey(enumValueKey) == false)
+						if (!enumBitmaskNames.ContainsKey(enumValueKey))
 							enumBitmaskNames.Add(enumValueKey, fieldInfo.Name);
 					}
 					// ReSharper disable once EmptyGeneralCatchClause

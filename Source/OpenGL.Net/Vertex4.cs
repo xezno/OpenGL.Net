@@ -649,7 +649,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -685,7 +685,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -1381,7 +1381,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -1417,7 +1417,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -2099,7 +2099,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -2135,7 +2135,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -2831,7 +2831,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -2867,7 +2867,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -3549,7 +3549,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -3585,7 +3585,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -4281,7 +4281,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -4317,7 +4317,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -5015,7 +5015,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -5051,7 +5051,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -5717,7 +5717,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -5753,7 +5753,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);
@@ -6449,7 +6449,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false) {
+			if (!undefined) {
 				if (Math.Abs(x / w - other.x / other.w) > precision)
 					return (false);
 				if (Math.Abs(y / w - other.y / other.w) > precision)
@@ -6485,7 +6485,7 @@ namespace OpenGL
 			if (undefined != otherUndefined)
 				return (false);
 
-			if (undefined == false)
+			if (!undefined)
 				return (x / w == other.x / other.w && y / w == other.y / other.w && z / w == other.z / other.w);
 			else
 				return (x == other.x && y == other.y && z == other.z);

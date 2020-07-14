@@ -42,7 +42,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContext_ARB);
@@ -70,7 +70,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContextProfile_ARB);
@@ -98,7 +98,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContextRobustness_ARB);
@@ -126,7 +126,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContextEsProfile_EXT);
@@ -154,7 +154,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.Multisample_ARB);
@@ -182,7 +182,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.SwapControl_EXT);
@@ -210,7 +210,7 @@ namespace OpenGL
 				get
 				{
 #if !MONODROID
-					if (Egl.IsRequired == false) {
+					if (!Egl.IsRequired) {
 						switch (Platform.CurrentPlatformId) {
 							case Platform.Id.WindowsNT:
 								return (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.SwapControlTear_EXT);

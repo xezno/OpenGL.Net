@@ -6101,7 +6101,7 @@ namespace OpenGL
 						fixed (Matrix4x4f* thisPtr = &this) {
 							Mat4x4 m = Unsafe.Read<Mat4x4>(thisPtr), i;
 
-							if (Mat4x4.Invert(m, out i) == false)
+							if (!Mat4x4.Invert(m, out i))
 								throw new InvalidOperationException("not invertible");
 
 							Unsafe.Write(&inverse, i);

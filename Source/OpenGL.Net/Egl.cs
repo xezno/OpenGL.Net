@@ -104,7 +104,7 @@ namespace OpenGL
 			// Load procedures
 			BindAPI();
 
-			if (IsAvailable == false)
+			if (!IsAvailable)
 				return;
 
 #if DEBUG
@@ -124,7 +124,7 @@ namespace OpenGL
 
 			try {
 				_IsInitializing = true;
-				if (Initialize(eglDisplay, null, null) == false)
+				if (!Initialize(eglDisplay, null, null))
 					throw new InvalidOperationException("unable to initialize EGL");
 
 				// Query EGL version

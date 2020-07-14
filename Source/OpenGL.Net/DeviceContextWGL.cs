@@ -536,14 +536,14 @@ namespace OpenGL
 		/// </exception>
 		public override IntPtr CreateContext(IntPtr sharedContext)
 		{
-			if (Wgl.CurrentExtensions == null || Wgl.CurrentExtensions.CreateContext_ARB == false) {
+			if (Wgl.CurrentExtensions == null || !Wgl.CurrentExtensions.CreateContext_ARB) {
 				IntPtr renderContext = Wgl.CreateContext(DeviceContext);
 				if (renderContext == IntPtr.Zero)
 					throw new WglException(Marshal.GetLastWin32Error());
 
 				if (sharedContext != IntPtr.Zero) {
 					bool res = Wgl.ShareLists(renderContext, sharedContext);
-					if (res == false)
+					if (!res)
 						throw new WglException(Marshal.GetLastWin32Error());
 				}
 
@@ -607,7 +607,7 @@ namespace OpenGL
 		[RequiredByFeature("WGL_ARB_create_context")]
 		public override IntPtr CreateContextAttrib(IntPtr sharedContext, int[] attribsList, KhronosVersion api)
 		{
-			if (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContext_ARB == false)
+			if (Wgl.CurrentExtensions != null && !Wgl.CurrentExtensions.CreateContext_ARB)
 				throw new InvalidOperationException("WGL_ARB_create_context not supported");
 			if (attribsList != null && attribsList.Length == 0)
 				throw new ArgumentException("zero length array", nameof(attribsList));
@@ -630,7 +630,7 @@ namespace OpenGL
 					case KhronosVersion.ApiGles1:
 					case KhronosVersion.ApiGles2:
 					case KhronosVersion.ApiGlsc2:
-						if (Wgl.CurrentExtensions != null && Wgl.CurrentExtensions.CreateContextEsProfile_EXT == false)
+						if (Wgl.CurrentExtensions != null && !Wgl.CurrentExtensions.CreateContextEsProfile_EXT)
 							throw new NotSupportedException("OpenGL ES API not supported");
 						break;
 					default:
@@ -798,9 +798,9 @@ namespace OpenGL
 		[RequiredByFeature("WGL_EXT_swap_control")]
 		public override bool SwapInterval(int interval)
 		{
-			if (Wgl.CurrentExtensions.SwapControl_EXT == false)
+			if (!Wgl.CurrentExtensions.SwapControl_EXT)
 				throw new InvalidOperationException("WGL_EXT_swap_control not supported");
-			if (interval == -1 && Wgl.CurrentExtensions.SwapControlTear_EXT == false)
+			if (interval == -1 && !Wgl.CurrentExtensions.SwapControlTear_EXT)
 				throw new InvalidOperationException("WGL_EXT_swap_control_tear not supported");
 
 			return Wgl.SwapIntervalEXT(interval);
@@ -1054,7 +1054,7 @@ namespace OpenGL
 			// Set choosen pixel format
 			Wgl.PIXELFORMATDESCRIPTOR pDescriptor = new Wgl.PIXELFORMATDESCRIPTOR();
 
-			if (Wgl.SetPixelFormat(DeviceContext, pixelFormatIndex, ref pDescriptor) == false)
+			if (!Wgl.SetPixelFormat(DeviceContext, pixelFormatIndex, ref pDescriptor))
 				throw new InvalidOperationException("unable to set pixel format", GetPlatformException());
 
 			IsPixelFormatSet = true;
@@ -1172,7 +1172,7 @@ namespace OpenGL
 			}
 			
 			// Set choosen pixel format
-			if (Wgl.SetPixelFormat(_DeviceContext, choosenFormats[0], ref pDescriptor) == false) {
+			if (!Wgl.SetPixelFormat(_DeviceContext, choosenFormats[0], ref pDescriptor)) {
 				Win32Exception innerException = new Win32Exception(Marshal.GetLastWin32Error());
 				throw new InvalidOperationException(String.Format("unable to set pixel format {0}: {1}", pixelFormat.FormatIndex, innerException.Message), innerException);
 			}
@@ -1191,7 +1191,7 @@ namespace OpenGL
 			if (disposing) {
 				// Release device context
 				if (DeviceContext != IntPtr.Zero) {
-					if (_DeviceContextPBuffer == false) {
+					if (!_DeviceContextPBuffer) {
 						bool res = Wgl.ReleaseDC(_WindowHandle, DeviceContext);
 						Debug.Assert(res);
 					} else {

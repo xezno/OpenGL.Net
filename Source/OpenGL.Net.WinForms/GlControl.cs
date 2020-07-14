@@ -368,7 +368,7 @@ namespace OpenGL
 		/// </summary>
 		private void DesignerValidatePixelFormat()
 		{
-			if (DesignMode == false)
+			if (!DesignMode)
 				return;
 
 			try {
@@ -412,7 +412,7 @@ namespace OpenGL
 			{
 				_Animation = value;
 				
-				if (DesignMode == false) {
+				if (!DesignMode) {
 					if      (_AnimationTimer != null && AnimationTimer)
 						_AnimationTimer.Enabled = Animation;
 					else if (!AnimationTimer && Animation && !AnimationTimer && IsHandleCreated)
@@ -761,7 +761,7 @@ namespace OpenGL
 		protected virtual void MakeCurrentContext()
 		{
 			// Make context current
-			if (_DeviceContext.MakeCurrent(_RenderContext) == false)
+			if (!_DeviceContext.MakeCurrent(_RenderContext))
 				throw new InvalidOperationException("unable to make context current");
 		}
 
@@ -915,7 +915,7 @@ namespace OpenGL
 			if (ContextSharingGroup == null)
 				throw new InvalidOperationException("undefined context sharing group");
 
-			if (_SharingControls.TryGetValue(ContextSharingGroup, out _SharingControl) == false)
+			if (!_SharingControls.TryGetValue(ContextSharingGroup, out _SharingControl))
 				throw new InvalidOperationException(String.Format("no GlControl sharing with {0}", ContextSharingGroup));
 
 			// Resure context
@@ -1191,7 +1191,7 @@ namespace OpenGL
 		/// </param>
 		protected override void OnHandleCreated(EventArgs e)
 		{
-			if (DesignMode == false) {
+			if (!DesignMode) {
 				// Create device context
 				CreateDeviceContext();
 				// Create OpenGL context
@@ -1217,7 +1217,7 @@ namespace OpenGL
 		/// </param>
 		protected override void OnHandleDestroyed(EventArgs e)
 		{
-			if (DesignMode == false) {
+			if (!DesignMode) {
 				if (_RenderContext != IntPtr.Zero) {
 					// Event handling
 					OnContextDestroying();
@@ -1241,7 +1241,7 @@ namespace OpenGL
 		/// </param>
 		protected override void OnPaint(PaintEventArgs e)
 		{
-			if (DesignMode == false) {
+			if (!DesignMode) {
 				Stopwatch sw = Stopwatch.StartNew();
 				
 				MakeCurrentContext();

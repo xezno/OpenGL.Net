@@ -83,7 +83,7 @@ namespace OpenGL
 
 			// Determine version value (support up to 3 version numbers)
 			Match versionMatch = Regex.Match(input, @"(?<Major>\d+)\.(?<Minor>\d+)(\.(?<Rev>\d+))?( .*)?");
-			if (versionMatch.Success == false)
+			if (!versionMatch.Success)
 				throw new ArgumentException("unrecognized pattern", nameof(input));
 
 			int versionMajor = int.Parse(versionMatch.Groups["Major"].Value);
