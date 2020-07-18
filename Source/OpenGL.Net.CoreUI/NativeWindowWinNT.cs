@@ -1161,7 +1161,15 @@ namespace OpenGL.CoreUI
 					IntPtr monitor = User32Methods.MonitorFromWindow(windowHandle, MonitorFlag.MONITOR_DEFAULTTONEAREST);
 
 					if (!User32Methods.GetMonitorInfo(monitor, ref monitorInfo))
-						throw new InvalidOperationException("unable to get monitor info");
+                    {
+						// Failed to get the closest monitor to the window - just try getting the default window instead
+						monitor = User32Methods.MonitorFromPoint(new NetCoreEx.Geometry.Point(0, 0), MonitorFlag.MONITOR_DEFAULTTOPRIMARY);
+						if (User32Methods.GetMonitorInfo(monitor, ref monitorInfo) == false)
+                        {
+							// Nope, couldn't get any monitors.
+							throw new InvalidOperationException("Unable to get monitor info");
+                        }
+                    }
 
 					// Store current location and size
 					fullscreenRestoreLocation = Location;
@@ -1182,6 +1190,7 @@ namespace OpenGL.CoreUI
 
 					if (!User32Methods.SetWindowPos(windowHandle, IntPtr.Zero, location.X, location.Y, size.Width, size.Height, windowPosFlags))
 						throw new InvalidOperationException("unable to set client size");
+						
 				} else {
 					// Restore previous styles
 					User32Methods.SetWindowLongPtr(windowHandle, (int)WindowLongFlags.GWL_STYLE, (IntPtr)fullscreenRestoreStyle);
