@@ -246,12 +246,17 @@ namespace OpenGL.CoreUI
 		
 		private IntPtr WindowsWndProcMouseWheel(IntPtr hWnd, IntPtr wParam, IntPtr lParam)
 		{
-            short wheelTicks = (short)(((wParam.ToInt32() >> 16) & 0xFFFF) / /* WHEEL_DELTA */ 120);
+            short wheelTicks = (short)(WindowsWndProc_GetWheelDelta(wParam) / /* WHEEL_DELTA */ 120);
 
             OnMouseWheel(WindowsWndProc_GetMouseLocation(lParam), WindowsWndProc_GetMouseButtons(wParam), wheelTicks);
 
 			return IntPtr.Zero;
 		}
+
+		private short WindowsWndProc_GetWheelDelta(IntPtr wParam)
+        {
+			return ((short)((int)wParam>>16));
+        }
 
 		private IntPtr WindowsWndProcClose(IntPtr hWnd, IntPtr wParam, IntPtr lParam)
 		{

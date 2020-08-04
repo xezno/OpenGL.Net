@@ -56,8 +56,6 @@
     <ProjectReference Include="..\OpenGL.Net\OpenGL.Net.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="GlControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="GlControl.cs" />
   </ItemGroup>
 </Project>
