@@ -7,9 +7,9 @@
     <DisableOutOfProcTaskHost>true</DisableOutOfProcTaskHost>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <UseWindowsForms>true</UseWindowsForms>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>x86;x64</Platforms>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutputPath>bin\netcore\Debug\</OutputPath>
     <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
@@ -21,7 +21,7 @@
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutputPath>bin\netcoreapp31\Release\</OutputPath>
     <BaseIntermediateOutputPath>obj\netcoreapp31</BaseIntermediateOutputPath>
     <DocumentationFile>bin\netcoreapp31\Release\OpenGL.Net.WinForms.xml</DocumentationFile>

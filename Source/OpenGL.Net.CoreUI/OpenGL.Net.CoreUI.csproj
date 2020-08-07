@@ -16,10 +16,10 @@
     <Version>0.5.2</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>x86;x64</Platforms>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\Release\</OutputPath>
     <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP2_2</DefineConstants>
@@ -32,7 +32,7 @@
     <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP2_2</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\Debug\</OutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
@@ -51,10 +51,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="WinApi" Version="4.0.0" />
   </ItemGroup>
 

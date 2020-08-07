@@ -16,10 +16,10 @@
     <Version>0.5.1</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Platforms>AnyCPU;x86</Platforms>
+    <Platforms>x86;x64</Platforms>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\Release</OutputPath>
     <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP3_1</DefineConstants>
@@ -33,7 +33,7 @@
     <DefineConstants>TRACE;NETCORE;RELEASE;NETCOREAPP3_1</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\Debug</OutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
