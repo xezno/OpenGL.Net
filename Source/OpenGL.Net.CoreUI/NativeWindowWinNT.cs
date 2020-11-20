@@ -255,7 +255,7 @@ namespace OpenGL.CoreUI
 
 		private short WindowsWndProc_GetWheelDelta(IntPtr wParam)
         {
-			return ((short)((int)wParam>>16));
+			return ((short)((long)wParam>>16));
         }
 
 		private IntPtr WindowsWndProcClose(IntPtr hWnd, IntPtr wParam, IntPtr lParam)
@@ -279,7 +279,7 @@ namespace OpenGL.CoreUI
 		private static MouseButton WindowsWndProc_GetMouseButtons(IntPtr wParam)
 		{
 			MouseButton buttons = MouseButton.None;
-			int wParamValue = wParam.ToInt32() & 0xFFFF;
+			long wParamValue = wParam.ToInt64() & 0xFFFF;
 
 			if ((wParamValue & 0x0001) != 0)
 				buttons |= MouseButton.Left;
