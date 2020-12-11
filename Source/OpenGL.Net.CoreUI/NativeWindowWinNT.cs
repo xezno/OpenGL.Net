@@ -327,6 +327,10 @@ namespace OpenGL.CoreUI
 				windowStyleses |= NativeWindowStyles.Caption;
 			if ((styles & WindowStyles.WS_THICKFRAME) != 0)
 				windowStyleses |= NativeWindowStyles.Resizeable;
+			if ((styles & WindowStyles.WS_MINIMIZEBOX) != 0)
+				windowStyleses |= NativeWindowStyles.MinimizeBox;
+			if ((styles & WindowStyles.WS_MAXIMIZEBOX) != 0)
+				windowStyleses |= NativeWindowStyles.MaximizeBox;
 
 			return windowStyleses;
 		}
@@ -341,6 +345,10 @@ namespace OpenGL.CoreUI
 				windowStyles |= WindowStyles.WS_CAPTION | WindowStyles.WS_BORDER;
 			if ((styleses & NativeWindowStyles.Resizeable) == NativeWindowStyles.Resizeable)
 				windowStyles |= WindowStyles.WS_THICKFRAME;
+			if ((styleses & NativeWindowStyles.MaximizeBox) == NativeWindowStyles.MaximizeBox)
+				windowStyles |= WindowStyles.WS_MAXIMIZEBOX | WindowStyles.WS_SYSMENU;
+			if ((styleses & NativeWindowStyles.MinimizeBox) == NativeWindowStyles.MinimizeBox)
+				windowStyles |= WindowStyles.WS_MINIMIZEBOX | WindowStyles.WS_SYSMENU;
 
 			return windowStyles;
 		}

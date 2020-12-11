@@ -49,9 +49,12 @@ namespace OpenGL.CoreUI
 		/// </summary>
 		Resizeable =	0x0004 | Border,
 
+		MaximizeBox	=	0x0010 | Resizeable,
+		MinimizeBox =	0x0020 | Resizeable,
+
 		/// <summary>
 		/// Overlapped window (shortcut).
 		/// </summary>
-		Overlapped = Caption | Border | Resizeable,
+		Overlapped = Caption | Border | Resizeable | MaximizeBox | MinimizeBox,
 	}
 }
