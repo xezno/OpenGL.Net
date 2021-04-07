@@ -1,13 +1,14 @@
 ﻿<Project>
 
   <PropertyGroup>
-    <BaseIntermediateOutputPath>obj\netcoreapp3.1</BaseIntermediateOutputPath>
+    <BaseIntermediateOutputPath>obj\net50</BaseIntermediateOutputPath>
+    <Configurations>Debug;Release;Debug-Console</Configurations>
   </PropertyGroup>
 
   <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <AssemblyName>OpenGL.Net.Math</AssemblyName>
     <RootNamespace>OpenGL</RootNamespace>
     <Authors>Luca Piccioni</Authors>
@@ -39,7 +40,19 @@
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Console|x64'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputPath>bin\netcore\Debug</OutputPath>
+    <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <OutputPath>bin\netcore\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Console|x86'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <OutputPath>bin\netcore\x86\Debug\</OutputPath>
     <DefineConstants>TRACE;NETCORE;NETCOREAPP3_1</DefineConstants>
